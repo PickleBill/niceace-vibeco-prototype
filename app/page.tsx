@@ -2,13 +2,14 @@
 
 import { useState } from "react";
 
-type Section = "player" | "course" | "sponsor" | "claim" | "roadmap";
+type Section = "player" | "course" | "sponsor" | "claim" | "radar" | "roadmap";
 
 const sections: Array<{ id: Section; label: string }> = [
   { id: "player", label: "Player" },
   { id: "course", label: "Course" },
   { id: "sponsor", label: "Sponsor" },
   { id: "claim", label: "Claim" },
+  { id: "radar", label: "Radar" },
   { id: "roadmap", label: "Roadmap" },
 ];
 
@@ -24,22 +25,46 @@ const roadmap = [
     detail: "Course event setup, entry payments, sponsor-backed prize pools, admin resolution, and recap links.",
   },
   {
-    phase: "V1.5",
-    title: "Trust layer",
-    detail: "Witness checklist, GPS/time evidence, course marshal confirmation, payout review, and dispute notes.",
+    phase: "Radar",
+    title: "Opportunity scanner",
+    detail: "Public-source scanning, clustering, agent review, PRD draft, and build handoff artifacts.",
   },
   {
-    phase: "V2",
+    phase: "Social",
     title: "Social competition",
-    detail: "Group challenges, trip ledgers, closest-to-pin pots, sponsor milestones, and shareable trophy room.",
+    detail: "Group challenges, trip ledger summaries, closest-to-pin formats, sponsor milestones, and trophy room.",
   },
 ];
 
 const vibecoLoop = [
-  "Every golfer complaint, sponsor ask, and course-operator workaround becomes a structured product signal.",
+  "Vibeco proactively scans for golfer pain, sponsor demand, operator workarounds, and competitor gaps.",
   "Vibeco runs perspective passes: customer, skeptic, builder, legal/compliance, growth, and sponsor ROI.",
   "Accepted signals become Lovable prompts, Claude Code tasks, GitHub issues, and reusable playbook appends.",
   "NiceAce is the first full loop: idea in Vibeco, UI in Lovable/Claude design, production iteration in Codex.",
+];
+
+const opportunityClusters = [
+  {
+    title: "Golf trip settlement chaos",
+    source: "Reddit + forums",
+    score: 92,
+    signal: "Groups love side games but hate reconstructing who owes what after 18 holes.",
+    artifact: "Social Competition: trip ledger summary, no peer payments in V1.",
+  },
+  {
+    title: "Unofficial closest-to-pin pots",
+    source: "X + golf forums",
+    score: 88,
+    signal: "Players already run par-3 pots informally and want the course to make it official.",
+    artifact: "NiceAce format: course-certified par-3 challenge.",
+  },
+  {
+    title: "Sponsor attribution gap",
+    source: "Tournament posts",
+    score: 84,
+    signal: "Local sponsors fund events but rarely know whether the spend created foot traffic.",
+    artifact: "V1 requirement: sponsor recap with entries, shares, redemptions, and assets.",
+  },
 ];
 
 export default function Home() {
@@ -176,6 +201,40 @@ export default function Home() {
                 before expanding into peer-funded wagering, side games, or interstate campaigns.
               </p>
               <div className="risk-box">The trust layer ships before the betting layer.</div>
+            </Panel>
+          </div>
+        )}
+
+        {activeSection === "radar" && (
+          <div className="radar-layout">
+            <Panel title="Opportunity Radar" label="Proactive scanner">
+              <p>
+                The first Vibeco integration should not wait for a feedback button. It should go find
+                product demand in public conversations, cluster it, run agents, and produce build artifacts
+                for human approval.
+              </p>
+              <div className="cluster-list">
+                {opportunityClusters.map((cluster) => (
+                  <article className="cluster-card" key={cluster.title}>
+                    <div>
+                      <span>{cluster.source}</span>
+                      <h3>{cluster.title}</h3>
+                    </div>
+                    <strong>{cluster.score}</strong>
+                    <p>{cluster.signal}</p>
+                    <small>{cluster.artifact}</small>
+                  </article>
+                ))}
+              </div>
+            </Panel>
+            <Panel title="Scanner pipeline" label="Vibeco module">
+              <div className="pipeline">
+                <PlanStep number="01" title="Collect public signals">Reddit, X/Twitter, forums, app reviews, YouTube transcripts, and competitor changelogs.</PlanStep>
+                <PlanStep number="02" title="Cluster opportunities">Group repeated complaints, workarounds, willingness-to-pay hints, and sponsor demand.</PlanStep>
+                <PlanStep number="03" title="Run agent stack">Customer, course operator, sponsor, builder, skeptic, compliance, and growth.</PlanStep>
+                <PlanStep number="04" title="Generate artifacts">PRD, GitHub issue, Lovable prompt, Claude Code brief, and playbook append.</PlanStep>
+              </div>
+              <a className="doc-link" href="https://github.com/PickleBill/niceace-vibeco-prototype/blob/main/docs/OPPORTUNITY-RADAR-PRD.md">Opportunity Radar PRD</a>
             </Panel>
           </div>
         )}

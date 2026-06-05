@@ -19,6 +19,7 @@
           <button class="tab" data-tab="course">Course</button>
           <button class="tab" data-tab="sponsor">Sponsor</button>
           <button class="tab" data-tab="claim">Claim</button>
+          <button class="tab" data-tab="radar">Radar</button>
           <button class="tab" data-tab="roadmap">Roadmap</button>
         </div>
       </nav>
@@ -211,6 +212,30 @@
           </div>
         </section>
 
+        <section class="tab-panel" data-panel="radar">
+          <div class="radar-layout">
+            <article class="panel">
+              <div class="panel-head"><h2>Opportunity Radar</h2><span>Proactive scanner</span></div>
+              <p>The first Vibeco integration should not wait for a feedback button. It should go find product demand in public conversations, cluster it, run agents, and produce build artifacts for human approval.</p>
+              <div class="cluster-list">
+                <article class="cluster-card"><div><span>Reddit + forums</span><h3>Golf trip settlement chaos</h3></div><strong>92</strong><p>Groups love side games but hate reconstructing who owes what after 18 holes.</p><small>Social Competition: trip ledger summary, no peer payments in V1.</small></article>
+                <article class="cluster-card"><div><span>X + golf forums</span><h3>Unofficial closest-to-pin pots</h3></div><strong>88</strong><p>Players already run par-3 pots informally and want the course to make it official.</p><small>NiceAce format: course-certified par-3 challenge.</small></article>
+                <article class="cluster-card"><div><span>Tournament posts</span><h3>Sponsor attribution gap</h3></div><strong>84</strong><p>Local sponsors fund events but rarely know whether the spend created foot traffic.</p><small>V1 requirement: sponsor recap with entries, shares, redemptions, and assets.</small></article>
+              </div>
+            </article>
+            <article class="panel">
+              <div class="panel-head"><h2>Scanner pipeline</h2><span>Vibeco module</span></div>
+              <div class="pipeline">
+                <div class="plan-step"><span>01</span><div><h3>Collect public signals</h3><p>Reddit, X/Twitter, forums, app reviews, YouTube transcripts, and competitor changelogs.</p></div></div>
+                <div class="plan-step"><span>02</span><div><h3>Cluster opportunities</h3><p>Group repeated complaints, workarounds, willingness-to-pay hints, and sponsor demand.</p></div></div>
+                <div class="plan-step"><span>03</span><div><h3>Run agent stack</h3><p>Customer, course operator, sponsor, builder, skeptic, compliance, and growth.</p></div></div>
+                <div class="plan-step"><span>04</span><div><h3>Generate artifacts</h3><p>PRD, GitHub issue, Lovable prompt, Claude Code brief, and playbook append.</p></div></div>
+              </div>
+              <a class="doc-link" href="OPPORTUNITY-RADAR-PRD.md">Opportunity Radar PRD</a>
+            </article>
+          </div>
+        </section>
+
         <section class="tab-panel" data-panel="roadmap">
           <div class="roadmap-layout">
             <article class="panel">
@@ -218,14 +243,14 @@
               <div class="timeline">
                 <article><span>V0</span><div><h3>Playable proof</h3><p>QR arrival, one-tap entry, live pot, invitation loop, and simulated ace claim.</p></div></article>
                 <article><span>V1</span><div><h3>Course pilot</h3><p>Course setup, entry payments, sponsor prize pools, admin resolution, and recap links.</p></div></article>
-                <article><span>V1.5</span><div><h3>Trust layer</h3><p>Witness checklist, GPS/time evidence, course confirmation, payout review, and dispute notes.</p></div></article>
-                <article><span>V2</span><div><h3>Social competition</h3><p>Group challenges, trip ledgers, closest-to-pin pots, sponsor milestones, and trophy room.</p></div></article>
+                <article><span>Radar</span><div><h3>Opportunity scanner</h3><p>Public-source scanning, clustering, agent review, PRD draft, and build handoff artifacts.</p></div></article>
+                <article><span>Social</span><div><h3>Social competition</h3><p>Group challenges, trip ledger summaries, closest-to-pin formats, sponsor milestones, and trophy room.</p></div></article>
               </div>
             </article>
             <article class="panel">
               <div class="panel-head"><h2>How Vibeco plugs in</h2><span>Behind the scenes</span></div>
               <p>Vibeco should not be the NiceAce UI. It should be the engine that helps NiceAce learn faster than a normal app.</p>
-              <ul class="tight-list"><li>Capture golfer, sponsor, and course-operator signals.</li><li>Run customer, skeptic, builder, compliance, and growth passes.</li><li>Create Lovable prompts, Claude Code tasks, GitHub issues, and playbook appends.</li><li>Use NiceAce as the first full loop from idea to shipped prototype.</li></ul>
+              <ul class="tight-list"><li>Proactively scan for golfer pain, sponsor demand, operator workarounds, and competitor gaps.</li><li>Run customer, skeptic, builder, compliance, and growth passes.</li><li>Create Lovable prompts, Claude Code tasks, GitHub issues, and playbook appends.</li><li>Use NiceAce as the first full loop from idea to shipped prototype.</li></ul>
               <a class="doc-link" href="VIBECO-INTEGRATION-ROADMAP.md">Read the integration roadmap</a>
             </article>
           </div>

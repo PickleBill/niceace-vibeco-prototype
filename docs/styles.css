@@ -146,6 +146,7 @@ button { cursor: pointer; }
 .content-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
 .command-grid, .vibeco-grid, .scanner-grid, .prd-layout { grid-template-columns: minmax(0, 1fr) minmax(360px, .8fr); }
 .roadmap-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(360px, .82fr); gap: 16px; }
+.radar-layout { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(360px, .82fr); gap: 16px; }
 .panel {
   display: flex; flex-direction: column; gap: 16px; min-height: 100%; padding: 20px;
   border: 1px solid rgba(236,235,217,.14); border-radius: 8px; background: rgba(16,32,22,.85);
@@ -199,6 +200,16 @@ blockquote { border: 1px solid rgba(231,189,98,.34); border-radius: 8px; padding
   border: 1px solid rgba(236,235,217,.16); border-radius: 8px; color: var(--ink);
   background: var(--brass); text-decoration: none; font-weight: 900;
 }
+.cluster-list, .pipeline { display: grid; gap: 12px; }
+.cluster-card {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px 12px;
+  padding: 16px; border: 1px solid rgba(106, 196, 110, .34); border-radius: 8px;
+  background: linear-gradient(135deg, rgba(10, 71, 31, .46), transparent), rgba(23,40,29,.72);
+}
+.cluster-card span, .cluster-card small { color: var(--brass); font-weight: 900; text-transform: uppercase; }
+.cluster-card h3 { margin-top: 4px; }
+.cluster-card > strong { color: var(--green); font-family: "Chakra Petch", sans-serif; font-size: 2rem; }
+.cluster-card p, .cluster-card small { grid-column: 1 / -1; }
 .request { grid-template-columns: minmax(0, 1fr) auto; }
 .request button { min-width: 8.5rem; padding: 0 12px; color: var(--brass); }
 .signal { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 12px; width: 100%; padding: 12px; text-align: left; }
@@ -210,7 +221,7 @@ blockquote { border: 1px solid rgba(231,189,98,.34); border-radius: 8px; padding
 pre { overflow: auto; margin: 0; padding: 16px; border-radius: 8px; background: #06100a; color: var(--muted); font-size: .9rem; line-height: 1.55; white-space: pre-wrap; }
 
 @media (max-width: 1060px) {
-  .topbar, .hero-grid, .content-grid, .command-grid, .vibeco-grid, .scanner-grid, .prd-layout, .roadmap-layout { grid-template-columns: 1fr; }
+  .topbar, .hero-grid, .content-grid, .command-grid, .vibeco-grid, .scanner-grid, .prd-layout, .roadmap-layout, .radar-layout { grid-template-columns: 1fr; }
   .topbar { display: grid; }
 }
 @media (max-width: 680px) {

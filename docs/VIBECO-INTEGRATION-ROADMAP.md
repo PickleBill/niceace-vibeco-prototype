@@ -2,14 +2,14 @@
 
 ## Product stance
 
-NiceAce should be a standalone golf entertainment product. Vibeco should not appear as a dashboard inside the player experience. Vibeco is the product-development operating system behind NiceAce: it captures signals, evaluates them, turns accepted ideas into build artifacts, and writes reusable lessons back into playbooks.
+NiceAce should be a standalone golf entertainment product. Vibeco should not appear as a dashboard inside the player experience. Vibeco is the product-development operating system behind NiceAce: it proactively scans for problems and opportunities, evaluates them, turns accepted ideas into build artifacts, and writes reusable lessons back into playbooks.
 
 NiceAce is the first full proof loop:
 
 1. Idea originated and was pressure-tested in Vibeco.
 2. Prototype moved through Lovable and Claude design.
 3. Codex turns the best concept into a deployable public prototype.
-4. Product feedback should flow back into Vibeco as structured signals.
+4. Market signals should flow back into Vibeco as structured product opportunities.
 
 ## NiceAce V1 roadmap
 
@@ -32,17 +32,7 @@ NiceAce is the first full proof loop:
 - Claim queue exists, even if review is manual.
 - Sponsor recap page is generated after the event.
 
-### V1.5: trust layer
-
-- Claim evidence checklist.
-- Witness collection.
-- Course marshal confirmation.
-- Optional video upload.
-- Payout approval status.
-- Dispute notes.
-- Plain-English rules shown before payment.
-
-### V2: social competition
+### Social competition module
 
 - Group challenge mode.
 - Golf trip ledger.
@@ -51,15 +41,17 @@ NiceAce is the first full proof loop:
 - Sponsored milestones.
 - Shareable post-round recap.
 
+This can be pulled forward as its own build. It does not need to wait for a large trust-layer release. The correct V1 scope is probably "trip ledger and group challenge summary" without peer-to-peer money movement.
+
 ## Vibeco product changes
 
-### 1. Signal intake becomes a first-class object
+### 1. Opportunity signals become first-class objects
 
-Add a `signals` object to Vibeco, separate from ideas.
+Add an `opportunity_signals` object to Vibeco, separate from ideas and separate from user-submitted feedback.
 
 Required fields:
 
-- source: customer, sponsor, operator, public source, internal observation
+- source: Reddit, X/Twitter, forum, app review, competitor changelog, customer, sponsor, operator, internal observation
 - product: NiceAce, Vibeco, Courtana, other
 - raw text
 - segment
@@ -67,9 +59,11 @@ Required fields:
 - urgency
 - compliance sensitivity
 - attached URL or artifact
-- status: inbox, clustered, agent-reviewed, accepted, rejected, shipped
+- cluster id
+- opportunity type: pain, workaround, willingness-to-pay, competitor gap, sponsor demand, compliance risk
+- status: collected, clustered, agent-reviewed, accepted, rejected, shipped
 
-Why: Vibeco currently helps expand and distill ideas. The next creative layer is turning real-world friction into product direction.
+Why: Vibeco currently helps expand and distill ideas. The next creative layer is discovering real-world friction before a user takes the time to submit feedback.
 
 ### 2. Agent reviews become pipelines, not one-off reports
 
@@ -114,7 +108,7 @@ For NiceAce, this means a golfer complaint like “nobody remembers trip bets”
 - prototype change
 - post-ship lesson
 
-### 4. Public-source scanner is a separate product module
+### 4. Public-source scanner is the next product module
 
 Do not bolt scraping directly into NiceAce. Build it as a Vibeco module that can serve NiceAce, Courtana, and future products.
 
@@ -134,6 +128,7 @@ Pipeline:
 4. score pain intensity
 5. run agent review
 6. create PRD only if the cluster clears threshold
+7. generate GitHub issue, Lovable prompt, and Claude Code task brief
 
 ## Infrastructure recommendation
 
@@ -143,6 +138,7 @@ Pipeline:
 - Keep the richer React/Sites version for internal iteration.
 - Add GitHub issues for product tasks.
 - Use this roadmap as the next build-session handoff.
+- Build an Opportunity Radar prototype inside this repo to show the proactive scanning workflow.
 
 ### Medium term
 
@@ -155,7 +151,9 @@ Pipeline:
   - claims
   - recap links
 - Add a Vibeco `signals` table.
-- Add an edge function that turns accepted signals into GitHub issues and prompt artifacts.
+- Add a Vibeco `opportunity_signals` table.
+- Add a scanner job that collects public signals and sends clusters into Vibeco's agent pipeline.
+- Add an edge function that turns accepted opportunities into GitHub issues and prompt artifacts.
 
 ### Later
 
@@ -174,9 +172,51 @@ Build NiceAce V1 as a real app surface:
 4. Claim review queue.
 5. Static legal/prize-rules preview before payment.
 
-Then wire the first Vibeco integration:
+Then wire the first Vibeco integration as a proactive scanner, not as a passive feedback form:
 
-1. “Submit feedback” on the NiceAce prototype.
-2. Feedback creates a Vibeco signal.
-3. Signal runs the NiceAce agent stack.
-4. Accepted output creates a GitHub issue and implementation prompt.
+1. Scan public sources for golf, betting, tournament, sponsor, and trip-planning pain.
+2. Cluster related signals into opportunity candidates.
+3. Run the NiceAce agent stack against each cluster.
+4. Promote accepted opportunities into PRDs, GitHub issues, Lovable prompts, Claude Code task briefs, and Vibeco playbook appends.
+
+## Split-out builds
+
+### Build A: NiceAce Social Competition
+
+Goal: make the product more than a one-hole jackpot.
+
+V1 scope:
+
+- group challenge card
+- trip ledger summary
+- closest-to-pin format
+- long-drive format
+- trophy room entry
+- post-round share artifact
+
+Deliberate cut:
+
+- no peer-to-peer settlement in V1
+- no wallet
+- no odds language
+
+### Build B: Vibeco Opportunity Radar
+
+Goal: proactively discover product demand and route it through the Vibeco build loop.
+
+V1 scope:
+
+- source configuration
+- collected signal inbox
+- cluster view
+- agent review summary
+- PRD draft
+- GitHub issue draft
+- Lovable prompt
+- Claude Code task brief
+
+Deliberate cut:
+
+- no autonomous scraping of private or gated communities
+- no auto-creating issues without human approval
+- no source collection that violates platform terms
