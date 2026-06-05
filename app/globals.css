@@ -1,0 +1,1022 @@
+@import "tailwindcss";
+
+:root {
+  --ink: oklch(0.15 0.02 145);
+  --ink-soft: oklch(0.38 0.03 145);
+  --paper: oklch(0.96 0.012 110);
+  --panel: oklch(0.20 0.018 145);
+  --panel-2: oklch(0.25 0.022 145);
+  --line: oklch(0.34 0.03 145);
+  --green: oklch(0.66 0.15 145);
+  --green-deep: oklch(0.31 0.08 150);
+  --brass: oklch(0.79 0.11 83);
+  --red: oklch(0.62 0.17 27);
+  --sky: oklch(0.73 0.09 218);
+  --cream: oklch(0.90 0.035 96);
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+}
+
+* {
+  box-sizing: border-box;
+  letter-spacing: 0;
+}
+
+html {
+  background: var(--ink);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 16% 0%, oklch(0.28 0.07 145 / 0.85), transparent 34rem),
+    linear-gradient(135deg, oklch(0.12 0.018 140), oklch(0.19 0.025 155) 48%, oklch(0.11 0.022 125));
+  color: var(--cream);
+  font-family: var(--font-body), sans-serif;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.app-shell {
+  width: min(1460px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: var(--space-6) 0 var(--space-16);
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-4) 0;
+  background: color-mix(in oklch, var(--ink) 82%, transparent);
+  backdrop-filter: blur(18px);
+}
+
+.eyebrow,
+.kicker,
+.request-source,
+.panel-head span,
+.map-header span,
+.map-footer span {
+  margin: 0;
+  color: color-mix(in oklch, var(--brass) 78%, var(--cream));
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.topbar h1 {
+  margin: var(--space-1) 0 0;
+  font-family: var(--font-display), sans-serif;
+  font-size: 1.45rem;
+  font-weight: 700;
+}
+
+.tab-row,
+.hero-actions,
+.agent-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.tab,
+.agent,
+.primary,
+.secondary,
+.request button,
+.signal {
+  min-height: 2.55rem;
+  border: 1px solid color-mix(in oklch, var(--cream) 16%, transparent);
+  border-radius: 0.5rem;
+  color: var(--cream);
+  background: color-mix(in oklch, var(--panel) 72%, transparent);
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+}
+
+.tab,
+.agent {
+  padding: 0 var(--space-3);
+}
+
+.tab:hover,
+.agent:hover,
+.primary:hover,
+.secondary:hover,
+.request button:hover,
+.signal:hover {
+  transform: translateY(-1px);
+  border-color: color-mix(in oklch, var(--brass) 54%, var(--cream));
+}
+
+.tab.active,
+.agent.active {
+  background: var(--cream);
+  color: var(--ink);
+  border-color: var(--cream);
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(380px, 1fr);
+  gap: var(--space-8);
+  align-items: stretch;
+  min-height: 520px;
+  padding: var(--space-8) 0 var(--space-12);
+}
+
+.hero-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-4);
+}
+
+.hero-copy h2 {
+  max-width: 11ch;
+  margin: 0;
+  color: oklch(0.94 0.02 103);
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(3.2rem, 8vw, 7.6rem);
+  font-weight: 700;
+  line-height: 0.9;
+}
+
+.hero-copy p {
+  max-width: 64ch;
+  margin: 0;
+  color: color-mix(in oklch, var(--cream) 75%, var(--sky));
+  font-size: 1.05rem;
+  line-height: 1.75;
+}
+
+.primary,
+.secondary {
+  padding: 0 var(--space-4);
+  font-weight: 700;
+}
+
+.primary {
+  background: var(--green);
+  color: oklch(0.10 0.02 145);
+  border-color: var(--green);
+}
+
+.secondary {
+  background: transparent;
+}
+
+.course-map {
+  display: flex;
+  flex-direction: column;
+  min-height: 520px;
+  overflow: hidden;
+  border: 1px solid color-mix(in oklch, var(--cream) 18%, transparent);
+  border-radius: 0.5rem;
+  background:
+    linear-gradient(150deg, oklch(0.22 0.045 150), oklch(0.16 0.03 134)),
+    var(--panel);
+}
+
+.phone-shell {
+  display: grid;
+  place-items: center;
+  gap: var(--space-3);
+  min-height: 620px;
+}
+
+.phone-tools {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-2);
+  border: 1px solid color-mix(in oklch, var(--cream) 14%, transparent);
+  border-radius: 999px;
+  background: color-mix(in oklch, var(--panel) 84%, transparent);
+}
+
+.phone-tools button {
+  min-height: 2rem;
+  border: 0;
+  border-radius: 999px;
+  padding: 0 var(--space-3);
+  background: transparent;
+  color: color-mix(in oklch, var(--cream) 64%, transparent);
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.phone-tools button.on {
+  background: var(--cream);
+  color: var(--ink);
+}
+
+.phone {
+  position: relative;
+  width: min(390px, 100%);
+  height: 740px;
+  overflow: hidden;
+  border: 10px solid oklch(0.05 0.012 145);
+  border-radius: 2.6rem;
+  background: oklch(0.08 0.018 145);
+  box-shadow: 0 42px 90px oklch(0 0 0 / 0.5), 0 0 0 1px color-mix(in oklch, var(--cream) 12%, transparent);
+}
+
+.phone-shell.jackpot .phone {
+  background:
+    radial-gradient(90% 48% at 50% 0%, oklch(0.55 0.13 84 / 0.22), transparent 62%),
+    radial-gradient(90% 48% at 50% 100%, oklch(0.63 0.16 145 / 0.16), transparent 66%),
+    oklch(0.08 0.018 145);
+}
+
+.phone-shell.broadcast .phone {
+  background:
+    linear-gradient(color-mix(in oklch, var(--cream) 7%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in oklch, var(--cream) 7%, transparent) 1px, transparent 1px),
+    oklch(0.11 0.028 210);
+  background-size: 28px 28px, 28px 28px, auto;
+}
+
+.phone-notch {
+  position: absolute;
+  top: 0.55rem;
+  left: 50%;
+  z-index: 6;
+  width: 7.2rem;
+  height: 1.7rem;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background: oklch(0.02 0.005 145);
+}
+
+.phone-status {
+  position: absolute;
+  top: 0.9rem;
+  left: var(--space-5, 1.25rem);
+  right: var(--space-5, 1.25rem);
+  z-index: 5;
+  display: flex;
+  justify-content: space-between;
+  color: color-mix(in oklch, var(--cream) 84%, transparent);
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.phone-view {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: 4rem var(--space-5, 1.25rem) 2rem;
+}
+
+.course-row,
+.live-top,
+.pay-main,
+.phone-actions,
+.you-chip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.course-row strong,
+.live-top strong {
+  display: block;
+  font-family: var(--font-display), sans-serif;
+}
+
+.course-row small,
+.pay-main small,
+.you-chip small,
+.pay-note {
+  display: block;
+  color: color-mix(in oklch, var(--cream) 54%, transparent);
+}
+
+.course-row span,
+.live-top span,
+.scan-pill,
+.pot-card span,
+.hole-card span,
+.live-hero span {
+  color: var(--brass);
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.scan-pill {
+  align-self: center;
+  margin: 0;
+  border: 1px solid color-mix(in oklch, var(--green) 44%, transparent);
+  border-radius: 999px;
+  padding: var(--space-2) var(--space-3);
+  background: color-mix(in oklch, var(--green) 12%, transparent);
+  color: color-mix(in oklch, var(--green) 78%, var(--cream));
+}
+
+.hole-card,
+.pot-card,
+.live-hero {
+  display: grid;
+  gap: var(--space-2);
+  border: 1px solid color-mix(in oklch, var(--brass) 34%, transparent);
+  border-radius: 1rem;
+  padding: var(--space-4);
+  text-align: center;
+  background: color-mix(in oklch, var(--panel) 72%, transparent);
+}
+
+.hole-card strong {
+  font-family: var(--font-display), sans-serif;
+  font-size: 1.85rem;
+}
+
+.hole-card small,
+.pot-card small,
+.live-hero small {
+  color: color-mix(in oklch, var(--cream) 58%, transparent);
+}
+
+.pot-card strong,
+.live-hero strong,
+.ace-overlay strong {
+  color: var(--brass);
+  font-family: var(--font-display), sans-serif;
+  font-size: 3.8rem;
+  line-height: 0.9;
+  text-shadow: 0 0 28px oklch(0.79 0.11 83 / 0.28);
+}
+
+.arrive-view h3,
+.celebrate-view h3,
+.ace-overlay h3 {
+  margin: auto 0 0;
+  color: var(--cream);
+  font-family: var(--font-display), sans-serif;
+  font-size: 2rem;
+  line-height: 1.05;
+  text-align: center;
+}
+
+.phone-cta,
+.phone-link,
+.phone-actions button {
+  min-height: 3.25rem;
+  border: 0;
+  border-radius: 0.8rem;
+  padding: 0 var(--space-4);
+  font-weight: 900;
+}
+
+.phone-cta {
+  background: var(--green);
+  color: oklch(0.08 0.018 145);
+  box-shadow: 0 14px 34px oklch(0.66 0.15 145 / 0.28);
+}
+
+.phone-link {
+  background: transparent;
+  color: color-mix(in oklch, var(--cream) 64%, transparent);
+}
+
+.pay-view {
+  justify-content: end;
+  background: oklch(0 0 0 / 0.42);
+}
+
+.pay-sheet {
+  display: grid;
+  gap: var(--space-4);
+  border-radius: 2rem;
+  padding: var(--space-5, 1.25rem);
+  background: oklch(0.18 0.018 145);
+}
+
+.grabber {
+  justify-self: center;
+  width: 2.8rem;
+  height: 0.28rem;
+  border-radius: 999px;
+  background: color-mix(in oklch, var(--cream) 28%, transparent);
+}
+
+.pay-logo,
+.big-check,
+.you-chip b {
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.8rem;
+  background: var(--brass);
+  color: var(--ink);
+  font-family: var(--font-display), sans-serif;
+  font-weight: 900;
+}
+
+.pay-main > b {
+  font-family: var(--font-display), sans-serif;
+  font-size: 1.6rem;
+}
+
+.pay-sheet dl {
+  margin: 0;
+}
+
+.pay-sheet dl div {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-3) 0;
+  border-top: 1px solid color-mix(in oklch, var(--cream) 10%, transparent);
+}
+
+.pay-sheet dd {
+  margin: 0;
+  color: color-mix(in oklch, var(--cream) 86%, var(--brass));
+  text-align: right;
+}
+
+.face-check {
+  display: grid;
+  place-items: center;
+  gap: var(--space-2);
+  color: color-mix(in oklch, var(--cream) 64%, transparent);
+}
+
+.face-check span {
+  width: 3.6rem;
+  height: 3.6rem;
+  border: 4px solid color-mix(in oklch, var(--green) 32%, transparent);
+  border-top-color: var(--green);
+  border-radius: 50%;
+  animation: spin 900ms linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.celebrate-view {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.celebrate-view h3 {
+  margin-top: var(--space-4);
+}
+
+.celebrate-view p {
+  margin: 0;
+  color: color-mix(in oklch, var(--cream) 66%, transparent);
+}
+
+.pot-card.mini strong {
+  font-size: 3rem;
+}
+
+.live-view {
+  overflow-y: auto;
+}
+
+.live-hero {
+  background: color-mix(in oklch, var(--brass) 10%, var(--panel));
+}
+
+.you-chip {
+  justify-content: start;
+  border: 1px solid color-mix(in oklch, var(--green) 38%, transparent);
+  border-radius: 0.9rem;
+  padding: var(--space-3);
+  background: color-mix(in oklch, var(--green) 10%, transparent);
+}
+
+.phone-feed {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.phone-feed p {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin: 0;
+  border: 1px solid color-mix(in oklch, var(--cream) 10%, transparent);
+  border-radius: 0.75rem;
+  padding: var(--space-3);
+  background: color-mix(in oklch, var(--cream) 5%, transparent);
+}
+
+.phone-feed span {
+  color: var(--green);
+  font-weight: 900;
+}
+
+.phone-actions {
+  margin-top: auto;
+}
+
+.phone-actions button {
+  flex: 1;
+  border: 1px solid color-mix(in oklch, var(--cream) 14%, transparent);
+  color: var(--cream);
+  background: color-mix(in oklch, var(--cream) 7%, transparent);
+}
+
+.phone-actions button:last-child {
+  border: 0;
+  background: var(--brass);
+  color: var(--ink);
+}
+
+.ace-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  padding: var(--space-6);
+  text-align: center;
+  background:
+    radial-gradient(circle at 50% 30%, oklch(0.78 0.12 83 / 0.34), transparent 34%),
+    oklch(0.08 0.018 145);
+}
+
+.ace-overlay h3 {
+  margin: 0;
+}
+
+.ace-overlay p {
+  color: color-mix(in oklch, var(--cream) 76%, transparent);
+  line-height: 1.6;
+}
+
+.phone-home {
+  position: absolute;
+  left: 50%;
+  bottom: 0.55rem;
+  width: 7.4rem;
+  height: 0.28rem;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background: color-mix(in oklch, var(--cream) 42%, transparent);
+}
+
+.phone-shell.broadcast .hole-card,
+.phone-shell.broadcast .pot-card,
+.phone-shell.broadcast .live-hero {
+  border-radius: 0.25rem;
+  border-color: color-mix(in oklch, var(--green) 34%, transparent);
+}
+
+.phone-shell.broadcast .phone-cta,
+.phone-shell.broadcast .phone-actions button:last-child {
+  border-radius: 0.25rem;
+  background: var(--green);
+}
+
+.map-header,
+.map-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding: var(--space-4);
+}
+
+.map-header strong {
+  color: var(--brass);
+  font-family: var(--font-display), sans-serif;
+  font-size: 2rem;
+}
+
+.fairway {
+  position: relative;
+  flex: 1;
+  margin: 0 var(--space-4);
+  overflow: hidden;
+  border: 1px solid color-mix(in oklch, var(--green) 34%, transparent);
+  border-radius: 999px 999px 1.5rem 1.5rem;
+  background:
+    repeating-linear-gradient(102deg, oklch(0.30 0.08 147) 0 34px, oklch(0.26 0.07 147) 34px 68px);
+}
+
+.tee,
+.green,
+.node {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  font-weight: 800;
+}
+
+.tee {
+  bottom: 10%;
+  left: 12%;
+  width: 6.5rem;
+  height: 6.5rem;
+  background: var(--brass);
+  color: var(--ink);
+}
+
+.green {
+  top: 10%;
+  right: 13%;
+  width: 11rem;
+  height: 11rem;
+  background: oklch(0.70 0.14 145);
+  color: var(--ink);
+}
+
+.green i {
+  position: absolute;
+  top: 23%;
+  right: 31%;
+  width: 0.75rem;
+  height: 4.8rem;
+  background: var(--cream);
+}
+
+.green i::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0.75rem;
+  width: 2.8rem;
+  height: 1.8rem;
+  background: var(--red);
+  clip-path: polygon(0 0, 100% 18%, 0 100%);
+}
+
+.arc {
+  position: absolute;
+  border: 1px dashed color-mix(in oklch, var(--cream) 50%, transparent);
+  border-bottom: 0;
+  border-radius: 50% 50% 0 0;
+  transform: rotate(-18deg);
+}
+
+.arc-one {
+  left: 22%;
+  bottom: 24%;
+  width: 45%;
+  height: 48%;
+}
+
+.arc-two {
+  left: 35%;
+  bottom: 37%;
+  width: 34%;
+  height: 35%;
+}
+
+.node {
+  width: 5.8rem;
+  height: 5.8rem;
+  border: 1px solid color-mix(in oklch, var(--cream) 32%, transparent);
+  background: color-mix(in oklch, var(--ink) 66%, transparent);
+  color: var(--cream);
+  font-size: 0.85rem;
+}
+
+.payout {
+  right: 8%;
+  bottom: 17%;
+}
+
+.sponsor {
+  left: 42%;
+  top: 17%;
+}
+
+.vibeco {
+  left: 27%;
+  top: 45%;
+}
+
+.content-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-4);
+}
+
+.command-grid,
+.vibeco-grid,
+.scanner-grid,
+.prd-layout {
+  grid-template-columns: minmax(0, 1fr) minmax(360px, 0.8fr);
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  min-height: 100%;
+  padding: var(--space-5, 1.25rem);
+  border: 1px solid color-mix(in oklch, var(--cream) 14%, transparent);
+  border-radius: 0.5rem;
+  background: color-mix(in oklch, var(--panel) 85%, transparent);
+}
+
+.panel-head {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.panel h2,
+.panel h3 {
+  margin: 0;
+  font-family: var(--font-display), sans-serif;
+}
+
+.panel h2 {
+  color: oklch(0.93 0.02 100);
+  font-size: 1.35rem;
+}
+
+.panel h3 {
+  color: var(--brass);
+  font-size: 1rem;
+}
+
+.panel p,
+.panel li,
+.panel dd,
+.panel blockquote {
+  color: color-mix(in oklch, var(--cream) 78%, var(--sky));
+  line-height: 1.65;
+}
+
+.panel p,
+.panel blockquote {
+  margin: 0;
+}
+
+.muted {
+  color: color-mix(in oklch, var(--cream) 56%, transparent) !important;
+}
+
+.meter {
+  height: 0.7rem;
+  overflow: hidden;
+  border-radius: 999px;
+  background: color-mix(in oklch, var(--ink) 68%, transparent);
+}
+
+.meter span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--green), var(--brass));
+}
+
+.field-stack,
+.stack-list,
+.request-list,
+.signal-list,
+.prd-document {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  color: var(--brass);
+  font-weight: 700;
+}
+
+input,
+textarea {
+  width: 100%;
+  border: 1px solid color-mix(in oklch, var(--cream) 18%, transparent);
+  border-radius: 0.5rem;
+  background: color-mix(in oklch, var(--ink) 66%, transparent);
+  color: var(--cream);
+  padding: var(--space-3);
+  outline: none;
+}
+
+textarea {
+  min-height: 8rem;
+  resize: vertical;
+}
+
+input:focus,
+textarea:focus {
+  border-color: var(--green);
+}
+
+.plan-step,
+.request {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--space-3);
+  align-items: start;
+  padding: var(--space-4);
+  border: 1px solid color-mix(in oklch, var(--cream) 12%, transparent);
+  border-radius: 0.5rem;
+  background: color-mix(in oklch, var(--panel-2) 70%, transparent);
+}
+
+.plan-step > span {
+  display: grid;
+  place-items: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 999px;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-display), sans-serif;
+  font-weight: 700;
+}
+
+.risk-box {
+  padding: var(--space-3);
+  border: 1px solid color-mix(in oklch, var(--red) 42%, var(--cream));
+  border-radius: 0.5rem;
+  color: color-mix(in oklch, var(--cream) 86%, var(--red));
+  background: color-mix(in oklch, var(--red) 12%, transparent);
+  line-height: 1.6;
+}
+
+.roadmap {
+  display: grid;
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0 0 0 var(--space-5, 1.25rem);
+}
+
+blockquote {
+  border: 1px solid color-mix(in oklch, var(--brass) 34%, transparent);
+  border-radius: 0.5rem;
+  padding: var(--space-4);
+  background: color-mix(in oklch, var(--brass) 10%, transparent);
+  font-size: 1.08rem;
+}
+
+.request {
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.request button {
+  min-width: 8.5rem;
+  padding: 0 var(--space-3);
+  color: var(--brass);
+}
+
+.signal {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+  padding: var(--space-3);
+  text-align: left;
+}
+
+.signal.active {
+  border-color: var(--green);
+  background: color-mix(in oklch, var(--green-deep) 64%, transparent);
+}
+
+.signal span,
+.signal small,
+dt {
+  color: var(--brass);
+  font-weight: 700;
+}
+
+.definition-grid {
+  display: grid;
+  gap: var(--space-3);
+  margin: 0;
+}
+
+.definition-grid dd {
+  margin: var(--space-1) 0 0;
+}
+
+.prd-layout {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.prd-document ul {
+  margin: 0;
+  padding-left: var(--space-5, 1.25rem);
+}
+
+pre {
+  overflow: auto;
+  margin: 0;
+  padding: var(--space-4);
+  border-radius: 0.5rem;
+  background: oklch(0.12 0.018 145);
+  color: color-mix(in oklch, var(--cream) 82%, var(--sky));
+  font-size: 0.9rem;
+  line-height: 1.55;
+  white-space: pre-wrap;
+}
+
+@media (max-width: 1060px) {
+  .topbar,
+  .hero-grid,
+  .content-grid,
+  .command-grid,
+  .vibeco-grid,
+  .scanner-grid,
+  .prd-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .topbar {
+    display: grid;
+  }
+
+  .course-map {
+    min-height: 420px;
+  }
+
+  .content-grid {
+    display: grid;
+  }
+}
+
+@media (max-width: 680px) {
+  .app-shell {
+    width: min(100% - 20px, 1460px);
+  }
+
+  .topbar {
+    position: static;
+    padding-bottom: var(--space-6);
+  }
+
+  .hero-copy h2 {
+    font-size: 3rem;
+  }
+
+  .hero-grid {
+    min-height: auto;
+    padding-top: var(--space-4);
+  }
+
+  .map-footer,
+  .signal,
+  .request {
+    grid-template-columns: 1fr;
+  }
+
+  .map-footer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .tee {
+    width: 4.6rem;
+    height: 4.6rem;
+  }
+
+  .green {
+    width: 8rem;
+    height: 8rem;
+  }
+
+  .node {
+    width: 4.7rem;
+    height: 4.7rem;
+  }
+}
