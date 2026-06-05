@@ -3,42 +3,39 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>NiceAce x Vibeco Prototype</title>
-    <meta
-      name="description"
-      content="Playable NiceAce hole-in-one prototype with Vibeco integration loops, public pain scanner, and PRD workflow."
-    />
+    <title>NiceAce V1 Prototype</title>
+    <meta name="description" content="Playable NiceAce hole-in-one challenge prototype." />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <main class="app-shell">
+    <main class="app-shell niceace-shell">
       <nav class="topbar">
         <div>
-          <p class="eyebrow">NiceAce operating prototype</p>
-          <h1>Aces only, wired into Vibeco.</h1>
+          <p class="eyebrow">NiceAce V1 prototype</p>
+          <h1>Aces only.</h1>
         </div>
         <div class="tab-row">
-          <button class="tab active" data-tab="command">Command</button>
-          <button class="tab" data-tab="niceace">NiceAce V1</button>
-          <button class="tab" data-tab="vibeco">Vibeco Loop</button>
-          <button class="tab" data-tab="scanner">Pain Scanner</button>
-          <button class="tab" data-tab="prd">PRD</button>
+          <button class="tab active" data-tab="player">Player</button>
+          <button class="tab" data-tab="course">Course</button>
+          <button class="tab" data-tab="sponsor">Sponsor</button>
+          <button class="tab" data-tab="claim">Claim</button>
+          <button class="tab" data-tab="roadmap">Roadmap</button>
         </div>
       </nav>
 
-      <section class="hero-grid">
+      <section class="hero-grid niceace-hero">
         <div class="hero-copy">
-          <p class="kicker">Golf entertainment plus product intelligence</p>
-          <h2>Make every ace attempt a product loop.</h2>
+          <p class="kicker">Hole-in-one entertainment for real courses</p>
+          <h2>Turn the par 3 into the loudest moment on the course.</h2>
           <p>
-            NiceAce starts as the cleanest hole-in-one prize workflow: events, sponsor-backed
-            payouts, claim verification, and recap artifacts. The strategic move is piping every
-            change request, complaint, sponsor ask, and public pain signal into Vibeco so Claude
-            Code, Lovable, and agent reviews turn demand into shippable work.
+            NiceAce is a mobile-first golf challenge product. A player scans a tee-box QR code,
+            joins the live ace pot in seconds, watches the pot move with every entry, and gets a
+            clean claim path if the impossible happens. Courses get a new game-day product.
+            Sponsors get a moment people actually talk about.
           </p>
           <div class="hero-actions">
-            <button class="primary" id="captureRequest">Capture change request</button>
-            <button class="secondary" data-open-tab="prd">Open PRD</button>
+            <button class="primary" data-open-tab="player">Play the flow</button>
+            <button class="secondary" data-open-tab="roadmap">See roadmap</button>
           </div>
         </div>
 
@@ -139,89 +136,100 @@
         </section>
       </section>
 
-      <section class="tab-panel active" data-panel="command">
-        <div class="content-grid command-grid">
-          <article class="panel">
-            <div class="panel-head"><h2>Launch posture</h2><span>62% prototype ready</span></div>
-            <div class="meter"><span></span></div>
-            <label>Product thesis<textarea>NiceAce is a hole-in-one and golf challenge platform where courses, sponsors, and foursomes create official prize-backed moments.</textarea></label>
-            <label>First customer set<input value="Weekend golfers, tournament organizers, course operators, and local sponsors" /></label>
-            <label>Wager/compliance posture<input value="Sponsor-funded prizes first; peer wagers later after compliance review" /></label>
-          </article>
-          <article class="panel">
-            <div class="panel-head"><h2>Two-pronged plan</h2><span>NiceAce plus Vibeco</span></div>
-            <div class="plan-step"><span>01</span><div><h3>Get NiceAce out</h3><p>Ship sponsor-funded hole-in-one and par-3 challenge pilots with claim verification, event setup, recap pages, and compliance review before peer wagering.</p></div></div>
-            <div class="plan-step"><span>02</span><div><h3>Bring it back to Vibeco</h3><p>Treat NiceAce as the proving ground for Vibeco's build-on-demand engine: accept requests, run agents, generate Lovable prompts, and commit Claude Code work through GitHub.</p></div></div>
-            <div class="plan-step"><span>03</span><div><h3>Mine the market</h3><p>Scan public golf, tournament, and sponsor conversations for pain points, cluster them, and promote only high-signal themes into PRDs.</p></div></div>
-          </article>
-        </div>
-      </section>
+      <section class="section-band">
+        <section class="tab-panel active" data-panel="player">
+          <div class="content-grid command-grid">
+            <article class="panel">
+              <div class="panel-head"><h2>Player promise</h2><span>No app install</span></div>
+              <p>The player experience has to be faster than ordering a drink at the turn: scan, confirm, get entered, watch the pot, invite the foursome.</p>
+              <div class="feature-row"><span>01</span><strong>QR tee-box entry</strong><p>Each prize hole has a live URL tied to course, hole, day, prize rules, and pot.</p></div>
+              <div class="feature-row"><span>02</span><strong>One-tap payment</strong><p>$10 entry is the prototype price. Sponsor-paid and hybrid pots can come later.</p></div>
+              <div class="feature-row"><span>03</span><strong>Live social proof</strong><p>Players see field growth, trophy history, and invite actions immediately after joining.</p></div>
+            </article>
+            <article class="panel">
+              <div class="panel-head"><h2>What V1 must not do</h2><span>Scope discipline</span></div>
+              <ul class="tight-list">
+                <li>Do not start with a full sportsbook or peer-to-peer wagering product.</li>
+                <li>Do not bury prize terms after payment.</li>
+                <li>Do not make operators manage payouts through spreadsheets.</li>
+                <li>Do not sell sponsors vague impressions; sell moments and recap artifacts.</li>
+              </ul>
+            </article>
+          </div>
+        </section>
 
-      <section class="tab-panel" data-panel="niceace">
-        <div class="content-grid">
-          <article class="panel"><div class="panel-head"><h2>Hole-in-one core</h2><span>V1 build</span></div><p>Course event setup, player buy-in, round confirmation, prize rules, and claim workflow.</p><div class="risk-box">Prize trust and compliance copy must be boringly clear before any social layer.</div></article>
-          <article class="panel"><div class="panel-head"><h2>Sponsor inventory</h2><span>Pilot package</span></div><p>Local sponsors fund prize pools, own branded holes, and get recap assets after each event.</p><div class="risk-box">Sell named golfer reach, recap clips, and attributed redemptions.</div></article>
-          <article class="panel"><div class="panel-head"><h2>Operator console</h2><span>Prototype</span></div><p>A single view for events, payouts, feedback, requests, AI analysis, and build handoff.</p><div class="risk-box">If this feels like admin software, it loses the sports-entertainment energy.</div></article>
-        </div>
-      </section>
+        <section class="tab-panel" data-panel="course">
+          <div class="content-grid command-grid">
+            <article class="panel">
+              <div class="panel-head"><h2>Course operator mode</h2><span>Pilot product</span></div>
+              <p>The course version should be operational: create challenge, select holes, set price/prize rules, start the day, resolve claims, export recap.</p>
+              <div class="ops-grid">
+                <div class="metric"><strong>3</strong><span>pilot formats</span></div>
+                <div class="metric"><strong>7 min</strong><span>event setup target</span></div>
+                <div class="metric"><strong>1</strong><span>claim queue</span></div>
+              </div>
+            </article>
+            <article class="panel">
+              <div class="panel-head"><h2>Pilot formats</h2><span>First sales motion</span></div>
+              <div class="plan-step"><span>01</span><div><h3>Public-course prize hole</h3><p>Daily ace pot on the most dramatic par 3.</p></div></div>
+              <div class="plan-step"><span>02</span><div><h3>Member-guest weekend</h3><p>Bigger purse, private leaderboard, sponsor recap.</p></div></div>
+              <div class="plan-step"><span>03</span><div><h3>Charity scramble</h3><p>Sponsor funds the pot; participants get the entertainment layer.</p></div></div>
+            </article>
+          </div>
+        </section>
 
-      <section class="tab-panel" data-panel="vibeco">
-        <div class="content-grid vibeco-grid">
-          <article class="panel">
-            <div class="panel-head"><h2>Agent router</h2><span>Perspective pass</span></div>
-            <div class="agent-buttons">
-              <button class="agent active" data-agent="Skeptic">Skeptic</button>
-              <button class="agent" data-agent="Customer">Customer</button>
-              <button class="agent" data-agent="Builder">Builder</button>
-              <button class="agent" data-agent="Sportsbook">Sportsbook</button>
-              <button class="agent" data-agent="Growth">Growth</button>
-            </div>
-            <blockquote id="agentOutput">The killer risk is trust. Users will forgive a rough leaderboard before they forgive unclear odds, prize eligibility, or a payout dispute.</blockquote>
-            <p class="muted">Vibeco owns analysis and handoff. Claude Code owns repo changes. Lovable owns quick UI iteration. GitHub is the audit trail.</p>
-          </article>
-          <article class="panel">
-            <div class="panel-head"><h2>Change request queue</h2><span>3 active</span></div>
-            <div class="request-list" id="requestList"></div>
-          </article>
-        </div>
-      </section>
+        <section class="tab-panel" data-panel="sponsor">
+          <div class="content-grid command-grid">
+            <article class="panel">
+              <div class="panel-head"><h2>Sponsor product</h2><span>Sell the moment</span></div>
+              <p>The sponsor is not buying a banner. They are underwriting the hole everyone talks about, then receiving a branded recap.</p>
+              <blockquote>Tonight’s $5,000 ace pot is presented by Trophy Room Sports Bar. Scan at Hole 7, take your shot, and bring your entry receipt in for the post-round special.</blockquote>
+            </article>
+            <article class="panel">
+              <div class="panel-head"><h2>Sponsor recap</h2><span>Attribution</span></div>
+              <ul class="tight-list"><li>Entries by event and hole</li><li>Unique players and repeat entrants</li><li>Foursome invites and share clicks</li><li>Coupon/redemption link usage</li><li>Winner or near-miss social assets</li></ul>
+            </article>
+          </div>
+        </section>
 
-      <section class="tab-panel" data-panel="scanner">
-        <div class="content-grid scanner-grid">
-          <article class="panel">
-            <div class="panel-head"><h2>Public pain-point scanner</h2><span>Prototype source inbox</span></div>
-            <div class="signal-list" id="signalList"></div>
-          </article>
-          <article class="panel">
-            <div class="panel-head"><h2>Selected signal</h2><span id="signalSegment">Golf trip organizer</span></div>
-            <blockquote id="signalQuote">Golf trip bets are fun until nobody remembers who owes what after the round.</blockquote>
-            <h3>Feature candidate</h3>
-            <p id="signalFeature">Trip ledger with auto-settlement summary</p>
-            <h3>Next pass</h3>
-            <p>Cluster duplicates, run agents, create PRD, then route to NiceAce or Vibeco playbook.</p>
-            <button class="primary" data-open-tab="prd">Generate PRD</button>
-          </article>
-        </div>
-      </section>
+        <section class="tab-panel" data-panel="claim">
+          <div class="content-grid command-grid">
+            <article class="panel">
+              <div class="panel-head"><h2>Ace claim path</h2><span>Trust layer</span></div>
+              <p>The claim flow is the product’s credibility engine. It needs to feel celebratory to the player and audit-ready to the operator.</p>
+              <div class="claim-flow">
+                <div><span>1</span><div><strong>Player taps “I aced it”</strong><p>Locks event, ticket, hole, timestamp, and device context.</p></div></div>
+                <div><span>2</span><div><strong>Evidence checklist</strong><p>Witnesses, scorecard, optional video, course marshal confirmation.</p></div></div>
+                <div><span>3</span><div><strong>Operator review</strong><p>Admin resolves claim, triggers payout workflow, creates trophy artifact.</p></div></div>
+              </div>
+            </article>
+            <article class="panel">
+              <div class="panel-head"><h2>Compliance posture</h2><span>Before scale</span></div>
+              <p>V1 should be framed as sponsor-backed skill-contest entertainment and reviewed by counsel before expanding into peer-funded wagering.</p>
+              <div class="risk-box">The trust layer ships before the betting layer.</div>
+            </article>
+          </div>
+        </section>
 
-      <section class="tab-panel" data-panel="prd">
-        <div class="prd-layout">
-          <article class="panel">
-            <div class="panel-head"><h2 id="prdTitle">Trip ledger with auto-settlement summary PRD</h2><span>Product requirements</span></div>
-            <div class="prd-document">
-              <h3>Problem</h3><p id="prdProblem">Golf trip bets are fun until nobody remembers who owes what after the round.</p>
-              <h3>Audience</h3><p id="prdAudience">Golf trip organizer</p>
-              <h3>V1 scope</h3>
-              <ul><li>Capture pain signal with source, segment, confidence, and raw context.</li><li>Run Skeptic, Customer, Builder, Sportsbook, and Growth perspectives.</li><li>Create a scoped Lovable prompt with acceptance criteria and risk notes.</li><li>Push accepted work into the NiceAce roadmap and Vibeco playbook ledger.</li></ul>
-              <h3>Success metrics</h3>
-              <ul><li>Signals promoted to roadmap per week</li><li>Accepted feature rate after agent review</li><li>Pilot event conversion lift</li><li>Sponsor renewal or upsell rate</li></ul>
-            </div>
-          </article>
-          <article class="panel">
-            <div class="panel-head"><h2>Handoff artifact</h2><span>Lovable plus Claude Code</span></div>
-            <pre id="handoffText"></pre>
-          </article>
-        </div>
+        <section class="tab-panel" data-panel="roadmap">
+          <div class="roadmap-layout">
+            <article class="panel">
+              <div class="panel-head"><h2>NiceAce product roadmap</h2><span>Build order</span></div>
+              <div class="timeline">
+                <article><span>V0</span><div><h3>Playable proof</h3><p>QR arrival, one-tap entry, live pot, invitation loop, and simulated ace claim.</p></div></article>
+                <article><span>V1</span><div><h3>Course pilot</h3><p>Course setup, entry payments, sponsor prize pools, admin resolution, and recap links.</p></div></article>
+                <article><span>V1.5</span><div><h3>Trust layer</h3><p>Witness checklist, GPS/time evidence, course confirmation, payout review, and dispute notes.</p></div></article>
+                <article><span>V2</span><div><h3>Social competition</h3><p>Group challenges, trip ledgers, closest-to-pin pots, sponsor milestones, and trophy room.</p></div></article>
+              </div>
+            </article>
+            <article class="panel">
+              <div class="panel-head"><h2>How Vibeco plugs in</h2><span>Behind the scenes</span></div>
+              <p>Vibeco should not be the NiceAce UI. It should be the engine that helps NiceAce learn faster than a normal app.</p>
+              <ul class="tight-list"><li>Capture golfer, sponsor, and course-operator signals.</li><li>Run customer, skeptic, builder, compliance, and growth passes.</li><li>Create Lovable prompts, Claude Code tasks, GitHub issues, and playbook appends.</li><li>Use NiceAce as the first full loop from idea to shipped prototype.</li></ul>
+              <a class="doc-link" href="VIBECO-INTEGRATION-ROADMAP.md">Read the integration roadmap</a>
+            </article>
+          </div>
+        </section>
       </section>
     </main>
     <script src="app.js"></script>

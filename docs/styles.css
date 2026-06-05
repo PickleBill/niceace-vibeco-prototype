@@ -142,8 +142,10 @@ button { cursor: pointer; }
 
 .tab-panel { display: none; }
 .tab-panel.active { display: block; }
+.section-band { padding-top: 16px; }
 .content-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
 .command-grid, .vibeco-grid, .scanner-grid, .prd-layout { grid-template-columns: minmax(0, 1fr) minmax(360px, .8fr); }
+.roadmap-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(360px, .82fr); gap: 16px; }
 .panel {
   display: flex; flex-direction: column; gap: 16px; min-height: 100%; padding: 20px;
   border: 1px solid rgba(236,235,217,.14); border-radius: 8px; background: rgba(16,32,22,.85);
@@ -167,6 +169,36 @@ textarea { min-height: 8rem; resize: vertical; }
 .plan-step > span { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 999px; background: var(--cream); color: var(--ink); font-family: "Chakra Petch"; font-weight: 900; }
 .risk-box { padding: 12px; border: 1px solid rgba(214,90,66,.5); border-radius: 8px; color: #f2c7b7; background: rgba(214,90,66,.12); line-height: 1.6; }
 blockquote { border: 1px solid rgba(231,189,98,.34); border-radius: 8px; padding: 16px; background: rgba(231,189,98,.1); font-size: 1.08rem; }
+.feature-row {
+  display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 8px 12px; align-items: start;
+  padding: 16px; border: 1px solid rgba(236,235,217,.12); border-radius: 8px; background: rgba(23,40,29,.64);
+}
+.feature-row span, .claim-flow span, .timeline article > span {
+  display: grid; place-items: center; width: 38px; height: 38px; border-radius: 999px;
+  background: var(--brass); color: var(--ink); font-family: "Chakra Petch", sans-serif; font-weight: 900;
+}
+.feature-row strong { align-self: center; color: var(--cream); font-family: "Chakra Petch", sans-serif; }
+.feature-row p { grid-column: 2; }
+.tight-list { display: grid; gap: 12px; margin: 0; padding-left: 20px; }
+.ops-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.metric {
+  display: grid; gap: 4px; padding: 16px; border: 1px solid rgba(79,179,91,.28);
+  border-radius: 8px; background: rgba(10, 71, 31, .38);
+}
+.metric strong { color: var(--green); font-family: "Chakra Petch", sans-serif; font-size: 2rem; }
+.metric span { color: rgba(236,235,217,.68); font-weight: 800; }
+.claim-flow, .timeline { display: grid; gap: 12px; }
+.claim-flow > div, .timeline article {
+  display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 12px;
+  padding: 16px; border: 1px solid rgba(236,235,217,.12); border-radius: 8px; background: rgba(23,40,29,.64);
+}
+.claim-flow strong { display: block; color: var(--cream); font-family: "Chakra Petch", sans-serif; margin-bottom: 4px; }
+.timeline article > span { width: 52px; border-radius: 8px; }
+.doc-link {
+  display: inline-flex; align-items: center; justify-content: center; min-height: 44px;
+  border: 1px solid rgba(236,235,217,.16); border-radius: 8px; color: var(--ink);
+  background: var(--brass); text-decoration: none; font-weight: 900;
+}
 .request { grid-template-columns: minmax(0, 1fr) auto; }
 .request button { min-width: 8.5rem; padding: 0 12px; color: var(--brass); }
 .signal { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 12px; width: 100%; padding: 12px; text-align: left; }
@@ -178,7 +210,7 @@ blockquote { border: 1px solid rgba(231,189,98,.34); border-radius: 8px; padding
 pre { overflow: auto; margin: 0; padding: 16px; border-radius: 8px; background: #06100a; color: var(--muted); font-size: .9rem; line-height: 1.55; white-space: pre-wrap; }
 
 @media (max-width: 1060px) {
-  .topbar, .hero-grid, .content-grid, .command-grid, .vibeco-grid, .scanner-grid, .prd-layout { grid-template-columns: 1fr; }
+  .topbar, .hero-grid, .content-grid, .command-grid, .vibeco-grid, .scanner-grid, .prd-layout, .roadmap-layout { grid-template-columns: 1fr; }
   .topbar { display: grid; }
 }
 @media (max-width: 680px) {
@@ -187,4 +219,5 @@ pre { overflow: auto; margin: 0; padding: 16px; border-radius: 8px; background: 
   .hero-copy h2 { font-size: 3rem; }
   .hero-grid { min-height: auto; padding-top: 16px; }
   .signal, .request { grid-template-columns: 1fr; }
+  .ops-grid { grid-template-columns: 1fr; }
 }

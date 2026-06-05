@@ -1,382 +1,213 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useState } from "react";
 
-type Tab = "command" | "niceace" | "vibeco" | "scanner" | "prd";
-type Agent = "Skeptic" | "Customer" | "Builder" | "Sportsbook" | "Growth";
-type RequestStatus = "triage" | "agent pass" | "lovable prompt" | "ready";
+type Section = "player" | "course" | "sponsor" | "claim" | "roadmap";
 
-const tabs: Array<{ id: Tab; label: string }> = [
-  { id: "command", label: "Command" },
-  { id: "niceace", label: "NiceAce V1" },
-  { id: "vibeco", label: "Vibeco Loop" },
-  { id: "scanner", label: "Pain Scanner" },
-  { id: "prd", label: "PRD" },
-];
-
-const agents: Agent[] = ["Skeptic", "Customer", "Builder", "Sportsbook", "Growth"];
-
-const launchTracks = [
-  {
-    name: "Hole-in-one core",
-    owner: "NiceAce",
-    stage: "V1 build",
-    detail: "Course event setup, player buy-in, round confirmation, prize rules, and claim workflow.",
-    risk: "Prize trust and compliance copy must be boringly clear before any social layer.",
-  },
-  {
-    name: "Sponsor inventory",
-    owner: "Aces only",
-    stage: "Pilot package",
-    detail: "Local sponsors fund prize pools, own branded holes, and get recap assets after each event.",
-    risk: "Avoid selling vague impressions. Sell named golfer reach, recap clips, and attributed redemptions.",
-  },
-  {
-    name: "Operator console",
-    owner: "Bill",
-    stage: "Prototype",
-    detail: "A single view for events, payouts, feedback, requests, AI analysis, and build handoff.",
-    risk: "If this feels like admin software, it loses the sports-entertainment energy.",
-  },
-];
-
-const agentOutputs: Record<Agent, string> = {
-  Skeptic:
-    "The killer risk is trust. Users will forgive a rough leaderboard before they forgive unclear odds, prize eligibility, or a payout dispute.",
-  Customer:
-    "I want to know if my $20 actually creates a real shot at a meaningful prize, who verifies it, and whether my foursome can talk trash in-app.",
-  Builder:
-    "V1 should fake sportsbook complexity and build the hard workflow: event creation, score attestation, claim evidence, and admin resolution.",
-  Sportsbook:
-    "Treat odds language carefully. Position it as skill-contest entertainment and sponsor-funded prize events, with jurisdiction review before scale.",
-  Growth:
-    "The viral loop is not a generic referral link. It is the post-round brag artifact: near-miss clips, sponsored hole recaps, and group challenges.",
-};
-
-const seedRequests = [
-  {
-    title: "Add group challenge mode",
-    source: "Golfer feedback",
-    status: "agent pass" as RequestStatus,
-    signal: "Foursomes want side-action without splitting across Venmo, texts, and scorecards.",
-  },
-  {
-    title: "Sponsor-facing recap page",
-    source: "Sales call",
-    status: "lovable prompt" as RequestStatus,
-    signal: "Local bar sponsor asked what they get after funding a par-3 prize.",
-  },
-  {
-    title: "Claim verification checklist",
-    source: "Operator risk",
-    status: "ready" as RequestStatus,
-    signal: "Aces, witnesses, GPS/time data, course confirmation, and video proof need one audit path.",
-  },
-];
-
-const painSignals = [
-  {
-    source: "Reddit",
-    quote: "Golf trip bets are fun until nobody remembers who owes what after the round.",
-    segment: "Golf trip organizer",
-    feature: "Trip ledger with auto-settlement summary",
-    score: 91,
-  },
-  {
-    source: "X",
-    quote: "Closest-to-the-pin pots would be way better if the course made them official.",
-    segment: "Weekend golfer",
-    feature: "Course-certified par-3 challenge",
-    score: 86,
-  },
-  {
-    source: "Reddit",
-    quote: "I would play more scrambles if the prize rules were clear before I paid.",
-    segment: "Tournament player",
-    feature: "Plain-English prize rules preview",
-    score: 83,
-  },
-  {
-    source: "Forum",
-    quote: "Sponsors never know whether their tournament spend turned into foot traffic.",
-    segment: "Local sponsor",
-    feature: "Sponsor attribution recap",
-    score: 79,
-  },
+const sections: Array<{ id: Section; label: string }> = [
+  { id: "player", label: "Player" },
+  { id: "course", label: "Course" },
+  { id: "sponsor", label: "Sponsor" },
+  { id: "claim", label: "Claim" },
+  { id: "roadmap", label: "Roadmap" },
 ];
 
 const roadmap = [
-  "Lock V1 flow: create event, join event, verify score, file claim, resolve payout.",
-  "Ship three pilot packages: public course, member-guest, local sponsor night.",
-  "Export every feedback item into Vibeco as a reusable idea-lab artifact.",
-  "Connect Claude Code and Lovable handoff so accepted requests become scoped prompts.",
-  "Add public-source scanner once compliance and source permissions are explicit.",
+  {
+    phase: "V0",
+    title: "Playable proof",
+    detail: "QR arrival, one-tap entry, live pot, invitation loop, and simulated ace claim.",
+  },
+  {
+    phase: "V1",
+    title: "Course pilot",
+    detail: "Course event setup, entry payments, sponsor-backed prize pools, admin resolution, and recap links.",
+  },
+  {
+    phase: "V1.5",
+    title: "Trust layer",
+    detail: "Witness checklist, GPS/time evidence, course marshal confirmation, payout review, and dispute notes.",
+  },
+  {
+    phase: "V2",
+    title: "Social competition",
+    detail: "Group challenges, trip ledgers, closest-to-pin pots, sponsor milestones, and shareable trophy room.",
+  },
 ];
 
-function nextStatus(status: RequestStatus): RequestStatus {
-  if (status === "triage") return "agent pass";
-  if (status === "agent pass") return "lovable prompt";
-  if (status === "lovable prompt") return "ready";
-  return "ready";
-}
+const vibecoLoop = [
+  "Every golfer complaint, sponsor ask, and course-operator workaround becomes a structured product signal.",
+  "Vibeco runs perspective passes: customer, skeptic, builder, legal/compliance, growth, and sponsor ROI.",
+  "Accepted signals become Lovable prompts, Claude Code tasks, GitHub issues, and reusable playbook appends.",
+  "NiceAce is the first full loop: idea in Vibeco, UI in Lovable/Claude design, production iteration in Codex.",
+];
 
 export default function Home() {
-  const [activeTab, setActiveTab] = useState<Tab>("command");
-  const [selectedAgent, setSelectedAgent] = useState<Agent>("Skeptic");
-  const [requests, setRequests] = useState(seedRequests);
-  const [selectedPain, setSelectedPain] = useState(painSignals[0]);
-  const [idea, setIdea] = useState(
-    "NiceAce is a hole-in-one and golf challenge platform where courses, sponsors, and foursomes create official prize-backed moments."
-  );
-  const [customer, setCustomer] = useState("Weekend golfers, tournament organizers, course operators, and local sponsors");
-  const [wagerMode, setWagerMode] = useState("Sponsor-funded prizes first; peer wagers later after compliance review");
-
-  const launchReadiness = useMemo(() => {
-    const ready = requests.filter((request) => request.status === "ready").length;
-    return Math.round(((ready + 2) / (requests.length + 5)) * 100);
-  }, [requests]);
-
-  const addRequest = () => {
-    const next = {
-      title: "AI-generated change request",
-      source: "Prototype intake",
-      status: "triage" as RequestStatus,
-      signal: `Pressure test: ${idea.slice(0, 96)}`,
-    };
-    setRequests((current) => [next, ...current]);
-    setActiveTab("vibeco");
-  };
-
-  const advanceRequest = (index: number) => {
-    setRequests((current) =>
-      current.map((request, itemIndex) =>
-        itemIndex === index ? { ...request, status: nextStatus(request.status) } : request
-      )
-    );
-  };
-
-  const prd = useMemo(
-    () => ({
-      title: `${selectedPain.feature} PRD`,
-      problem: selectedPain.quote,
-      audience: selectedPain.segment,
-      v1: [
-        "Capture pain signal with source, segment, confidence, and raw context.",
-        "Run Skeptic, Customer, Builder, Sportsbook, and Growth perspectives.",
-        "Create a scoped Lovable prompt with acceptance criteria and risk notes.",
-        "Push accepted work into the NiceAce roadmap and Vibeco playbook ledger.",
-      ],
-      metrics: [
-        "Signals promoted to roadmap per week",
-        "Accepted feature rate after agent review",
-        "Pilot event conversion lift",
-        "Sponsor renewal or upsell rate",
-      ],
-    }),
-    [selectedPain]
-  );
+  const [activeSection, setActiveSection] = useState<Section>("player");
 
   return (
-    <main className="app-shell">
+    <main className="app-shell niceace-shell">
       <nav className="topbar" aria-label="Primary">
         <div>
-          <p className="eyebrow">NiceAce operating prototype</p>
-          <h1>Aces only, wired into Vibeco.</h1>
+          <p className="eyebrow">NiceAce V1 prototype</p>
+          <h1>Aces only.</h1>
         </div>
         <div className="tab-row" role="tablist" aria-label="Prototype sections">
-          {tabs.map((tab) => (
+          {sections.map((section) => (
             <button
-              key={tab.id}
-              className={activeTab === tab.id ? "tab active" : "tab"}
-              onClick={() => setActiveTab(tab.id)}
+              key={section.id}
+              className={activeSection === section.id ? "tab active" : "tab"}
+              onClick={() => setActiveSection(section.id)}
               role="tab"
-              aria-selected={activeTab === tab.id}
+              aria-selected={activeSection === section.id}
             >
-              {tab.label}
+              {section.label}
             </button>
           ))}
         </div>
       </nav>
 
-      <section className="hero-grid">
+      <section className="hero-grid niceace-hero">
         <div className="hero-copy">
-          <p className="kicker">Golf entertainment plus product intelligence</p>
-          <h2>Make every ace attempt a product loop.</h2>
+          <p className="kicker">Hole-in-one entertainment for real courses</p>
+          <h2>Turn the par 3 into the loudest moment on the course.</h2>
           <p>
-            NiceAce starts as the cleanest hole-in-one prize workflow: events, sponsor-backed payouts,
-            claim verification, and recap artifacts. The strategic move is piping every change request,
-            complaint, sponsor ask, and public pain signal into Vibeco so Claude Code, Lovable, and agent
-            reviews turn demand into shippable work.
+            NiceAce is a mobile-first golf challenge product. A player scans a tee-box QR code,
+            joins the live ace pot in seconds, watches the pot move with every entry, and gets a
+            clean claim path if the impossible happens. Courses get a new game-day product. Sponsors
+            get a moment people actually talk about.
           </p>
           <div className="hero-actions">
-            <button className="primary" onClick={addRequest}>Capture change request</button>
-            <button className="secondary" onClick={() => setActiveTab("prd")}>Open PRD</button>
+            <button className="primary" onClick={() => setActiveSection("player")}>Play the flow</button>
+            <button className="secondary" onClick={() => setActiveSection("roadmap")}>See roadmap</button>
           </div>
         </div>
         <AcesPhone />
       </section>
 
-      {activeTab === "command" && (
-        <section className="content-grid command-grid">
-          <Panel title="Launch posture" label={`${launchReadiness}% prototype ready`}>
-            <div className="meter" aria-label={`Launch readiness ${launchReadiness}%`}>
-              <span style={{ width: `${launchReadiness}%` }} />
-            </div>
-            <div className="field-stack">
-              <label>
-                Product thesis
-                <textarea value={idea} onChange={(event) => setIdea(event.target.value)} />
-              </label>
-              <label>
-                First customer set
-                <input value={customer} onChange={(event) => setCustomer(event.target.value)} />
-              </label>
-              <label>
-                Wager/compliance posture
-                <input value={wagerMode} onChange={(event) => setWagerMode(event.target.value)} />
-              </label>
-            </div>
-          </Panel>
-          <Panel title="Two-pronged plan" label="NiceAce plus Vibeco">
-            <div className="stack-list">
-              <PlanStep number="01" title="Get NiceAce out">
-                Ship sponsor-funded hole-in-one and par-3 challenge pilots with claim verification, event
-                setup, recap pages, and a hard compliance review before peer wagering.
-              </PlanStep>
-              <PlanStep number="02" title="Bring it back to Vibeco">
-                Treat NiceAce as the proving ground for Vibeco's build-on-demand engine: accept requests,
-                run agents, generate Lovable prompts, and commit Claude Code work through GitHub.
-              </PlanStep>
-              <PlanStep number="03" title="Mine the market">
-                Scan public golf, tournament, and sponsor conversations for pain points, cluster them, and
-                promote only high-signal themes into PRDs.
-              </PlanStep>
-            </div>
-          </Panel>
-        </section>
-      )}
-
-      {activeTab === "niceace" && (
-        <section className="content-grid">
-          {launchTracks.map((track) => (
-            <Panel key={track.name} title={track.name} label={track.stage}>
-              <p className="muted">Owner: {track.owner}</p>
-              <p>{track.detail}</p>
-              <div className="risk-box">{track.risk}</div>
-            </Panel>
-          ))}
-          <Panel title="V1 release sequence" label="30/60/90">
-            <ol className="roadmap">
-              {roadmap.map((item) => <li key={item}>{item}</li>)}
-            </ol>
-          </Panel>
-        </section>
-      )}
-
-      {activeTab === "vibeco" && (
-        <section className="content-grid vibeco-grid">
-          <Panel title="Agent router" label="Perspective pass">
-            <div className="agent-buttons" role="list" aria-label="Perspective agents">
-              {agents.map((agent) => (
-                <button
-                  key={agent}
-                  className={selectedAgent === agent ? "agent active" : "agent"}
-                  onClick={() => setSelectedAgent(agent)}
-                >
-                  {agent}
-                </button>
-              ))}
-            </div>
-            <blockquote>{agentOutputs[selectedAgent]}</blockquote>
-            <p className="muted">
-              Integration pattern: Vibeco owns the idea analysis and handoff artifact. Claude Code owns repo
-              changes. Lovable owns quick UI iteration. GitHub is the audit trail.
-            </p>
-          </Panel>
-          <Panel title="Change request queue" label={`${requests.length} active`}>
-            <div className="request-list">
-              {requests.map((request, index) => (
-                <article className="request" key={`${request.title}-${index}`}>
-                  <div>
-                    <p className="request-source">{request.source}</p>
-                    <h3>{request.title}</h3>
-                    <p>{request.signal}</p>
-                  </div>
-                  <button onClick={() => advanceRequest(index)}>{request.status}</button>
-                </article>
-              ))}
-            </div>
-          </Panel>
-        </section>
-      )}
-
-      {activeTab === "scanner" && (
-        <section className="content-grid scanner-grid">
-          <Panel title="Public pain-point scanner" label="Prototype source inbox">
-            <div className="signal-list">
-              {painSignals.map((signal) => (
-                <button
-                  key={signal.feature}
-                  className={selectedPain.feature === signal.feature ? "signal active" : "signal"}
-                  onClick={() => setSelectedPain(signal)}
-                >
-                  <span>{signal.source}</span>
-                  <strong>{signal.feature}</strong>
-                  <small>{signal.score} signal score</small>
-                </button>
-              ))}
-            </div>
-          </Panel>
-          <Panel title="Selected signal" label={selectedPain.segment}>
-            <blockquote>{selectedPain.quote}</blockquote>
-            <dl className="definition-grid">
-              <div>
-                <dt>Feature candidate</dt>
-                <dd>{selectedPain.feature}</dd>
-              </div>
-              <div>
-                <dt>Next pass</dt>
-                <dd>Cluster duplicates, run agents, create PRD, then route to NiceAce or Vibeco playbook.</dd>
-              </div>
-            </dl>
-            <button className="primary" onClick={() => setActiveTab("prd")}>Generate PRD</button>
-          </Panel>
-        </section>
-      )}
-
-      {activeTab === "prd" && (
-        <section className="prd-layout">
-          <Panel title={prd.title} label="Product requirements">
-            <div className="prd-document">
-              <h3>Problem</h3>
-              <p>{prd.problem}</p>
-              <h3>Audience</h3>
-              <p>{prd.audience}</p>
-              <h3>V1 scope</h3>
-              <ul>{prd.v1.map((item) => <li key={item}>{item}</li>)}</ul>
-              <h3>Success metrics</h3>
-              <ul>{prd.metrics.map((item) => <li key={item}>{item}</li>)}</ul>
-              <h3>Recommended build path</h3>
+      <section className="section-band">
+        {activeSection === "player" && (
+          <div className="content-grid command-grid">
+            <Panel title="Player promise" label="No app install">
               <p>
-                Start in NiceAce for event-specific proof. Sync accepted learnings into Vibeco as a reusable
-                public-source-to-feature pipeline. Keep source permissions, moderation, and compliance notes
-                attached to every promoted feature.
+                The player experience has to be faster than ordering a drink at the turn: scan, confirm,
+                get entered, watch the pot, invite the foursome. No account wall before the dopamine.
               </p>
-            </div>
-          </Panel>
-          <Panel title="Handoff artifact" label="Lovable plus Claude Code">
-            <pre>{`Build: ${prd.title}
-User: ${prd.audience}
-Core job: turn "${selectedPain.quote}" into a scoped feature.
-Acceptance:
-- source signal is captured with URL, segment, and score
-- five agent perspectives are stored
-- accepted output generates a Lovable-ready prompt
-- GitHub issue links back to the original signal
-- NiceAce roadmap receives a visible status update`}</pre>
-          </Panel>
-        </section>
-      )}
+              <div className="feature-row"><span>01</span><strong>QR tee-box entry</strong><p>Each prize hole has a live URL tied to course, hole, day, prize rules, and pot.</p></div>
+              <div className="feature-row"><span>02</span><strong>One-tap payment</strong><p>$10 entry is the default prototype price. The product can support sponsor-paid, player-paid, or hybrid pots.</p></div>
+              <div className="feature-row"><span>03</span><strong>Live social proof</strong><p>Players see field growth, recent entries, trophy history, and invite actions immediately after joining.</p></div>
+            </Panel>
+            <Panel title="What V1 must not do" label="Scope discipline">
+              <ul className="tight-list">
+                <li>Do not start with a full sportsbook or peer-to-peer wagering product.</li>
+                <li>Do not bury prize terms in lawyer text after payment.</li>
+                <li>Do not make the course operator manage payouts through spreadsheets.</li>
+                <li>Do not make sponsors buy vague impressions; sell named moments and recap artifacts.</li>
+              </ul>
+            </Panel>
+          </div>
+        )}
+
+        {activeSection === "course" && (
+          <div className="content-grid command-grid">
+            <Panel title="Course operator mode" label="Pilot product">
+              <p>
+                The course version should be boringly operational: create challenge, select holes, set
+                price/prize rules, start the day, resolve claims, export recap. The front end can feel like
+                Vegas; the back office should feel like a cash drawer.
+              </p>
+              <div className="ops-grid">
+                <Metric value="3" label="pilot formats" />
+                <Metric value="7 min" label="event setup target" />
+                <Metric value="1" label="claim queue" />
+              </div>
+            </Panel>
+            <Panel title="Pilot formats" label="First sales motion">
+              <div className="stack-list">
+                <PlanStep number="01" title="Public-course prize hole">Daily ace pot on the most dramatic par 3.</PlanStep>
+                <PlanStep number="02" title="Member-guest weekend">Bigger purse, private leaderboard, sponsor recap.</PlanStep>
+                <PlanStep number="03" title="Charity scramble">Sponsor funds the pot; participants get the entertainment layer.</PlanStep>
+              </div>
+            </Panel>
+          </div>
+        )}
+
+        {activeSection === "sponsor" && (
+          <div className="content-grid command-grid">
+            <Panel title="Sponsor product" label="Sell the moment">
+              <p>
+                The sponsor is not buying a banner. They are underwriting the hole everyone talks about,
+                then receiving a branded recap with participants, entries, winners, claims, shares, and
+                redemption hooks.
+              </p>
+              <blockquote>
+                “Tonight’s $5,000 ace pot is presented by Trophy Room Sports Bar. Scan at Hole 7,
+                take your shot, and bring your entry receipt in for the post-round special.”
+              </blockquote>
+            </Panel>
+            <Panel title="Sponsor recap" label="Attribution">
+              <ul className="tight-list">
+                <li>Entries by event and hole</li>
+                <li>Unique players and repeat entrants</li>
+                <li>Foursome invites and share clicks</li>
+                <li>Coupon/redemption link usage</li>
+                <li>Winner or near-miss social assets</li>
+              </ul>
+            </Panel>
+          </div>
+        )}
+
+        {activeSection === "claim" && (
+          <div className="content-grid command-grid">
+            <Panel title="Ace claim path" label="Trust layer">
+              <p>
+                The claim flow is the product’s credibility engine. It needs to feel celebratory to the
+                player and audit-ready to the operator.
+              </p>
+              <div className="claim-flow">
+                <div><span>1</span><strong>Player taps “I aced it”</strong><p>Locks event, ticket, hole, timestamp, and device context.</p></div>
+                <div><span>2</span><strong>Evidence checklist</strong><p>Witnesses, scorecard, optional video, course marshal confirmation.</p></div>
+                <div><span>3</span><strong>Operator review</strong><p>Admin resolves claim, triggers payout workflow, creates trophy artifact.</p></div>
+              </div>
+            </Panel>
+            <Panel title="Compliance posture" label="Before scale">
+              <p>
+                V1 should be framed as sponsor-backed skill-contest entertainment and reviewed by counsel
+                before expanding into peer-funded wagering, side games, or interstate campaigns.
+              </p>
+              <div className="risk-box">The trust layer ships before the betting layer.</div>
+            </Panel>
+          </div>
+        )}
+
+        {activeSection === "roadmap" && (
+          <div className="roadmap-layout">
+            <Panel title="NiceAce product roadmap" label="Build order">
+              <div className="timeline">
+                {roadmap.map((item) => (
+                  <article key={item.phase}>
+                    <span>{item.phase}</span>
+                    <div>
+                      <h3>{item.title}</h3>
+                      <p>{item.detail}</p>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </Panel>
+            <Panel title="How Vibeco plugs in" label="Behind the scenes">
+              <p>
+                Vibeco should not be the NiceAce UI. It should be the engine that helps NiceAce learn
+                faster than a normal app: capture signals, run agents, create build prompts, and push
+                changes through GitHub.
+              </p>
+              <ul className="tight-list">
+                {vibecoLoop.map((item) => <li key={item}>{item}</li>)}
+              </ul>
+            </Panel>
+          </div>
+        )}
+      </section>
     </main>
   );
 }
@@ -516,35 +347,6 @@ function AcesPhone() {
   );
 }
 
-function CourseMap({ readiness }: { readiness: number }) {
-  return (
-    <div className="course-map" aria-label="NiceAce flow map">
-      <div className="map-header">
-        <span>Live event map</span>
-        <strong>{readiness}%</strong>
-      </div>
-      <div className="fairway">
-        <div className="tee">Tee</div>
-        <div className="arc arc-one" />
-        <div className="arc arc-two" />
-        <div className="green">
-          <span>Prize hole</span>
-          <i />
-        </div>
-        <div className="node payout">Payout</div>
-        <div className="node sponsor">Sponsor</div>
-        <div className="node vibeco">Vibeco</div>
-      </div>
-      <div className="map-footer">
-        <span>Event</span>
-        <span>Verification</span>
-        <span>Feedback</span>
-        <span>Build loop</span>
-      </div>
-    </div>
-  );
-}
-
 function Panel({
   title,
   label,
@@ -562,6 +364,15 @@ function Panel({
       </div>
       {children}
     </article>
+  );
+}
+
+function Metric({ value, label }: { value: string; label: string }) {
+  return (
+    <div className="metric">
+      <strong>{value}</strong>
+      <span>{label}</span>
+    </div>
   );
 }
 
