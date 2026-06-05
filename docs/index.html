@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>NiceAce x Vibeco Prototype</title>
+    <meta
+      name="description"
+      content="Playable NiceAce hole-in-one prototype with Vibeco integration loops, public pain scanner, and PRD workflow."
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <nav class="topbar">
+        <div>
+          <p class="eyebrow">NiceAce operating prototype</p>
+          <h1>Aces only, wired into Vibeco.</h1>
+        </div>
+        <div class="tab-row">
+          <button class="tab active" data-tab="command">Command</button>
+          <button class="tab" data-tab="niceace">NiceAce V1</button>
+          <button class="tab" data-tab="vibeco">Vibeco Loop</button>
+          <button class="tab" data-tab="scanner">Pain Scanner</button>
+          <button class="tab" data-tab="prd">PRD</button>
+        </div>
+      </nav>
+
+      <section class="hero-grid">
+        <div class="hero-copy">
+          <p class="kicker">Golf entertainment plus product intelligence</p>
+          <h2>Make every ace attempt a product loop.</h2>
+          <p>
+            NiceAce starts as the cleanest hole-in-one prize workflow: events, sponsor-backed
+            payouts, claim verification, and recap artifacts. The strategic move is piping every
+            change request, complaint, sponsor ask, and public pain signal into Vibeco so Claude
+            Code, Lovable, and agent reviews turn demand into shippable work.
+          </p>
+          <div class="hero-actions">
+            <button class="primary" id="captureRequest">Capture change request</button>
+            <button class="secondary" data-open-tab="prd">Open PRD</button>
+          </div>
+        </div>
+
+        <section class="phone-shell jackpot" id="phoneShell" aria-label="Playable Aces prototype">
+          <div class="phone-tools">
+            <button class="on" data-theme="jackpot">Jackpot</button>
+            <button data-theme="broadcast">Broadcast</button>
+            <button id="restartPhone">Restart</button>
+          </div>
+          <div class="phone">
+            <div class="phone-notch"></div>
+            <div class="phone-status"><span>9:41</span><span>LIVE</span></div>
+
+            <div class="phone-view active" data-view="arrive">
+              <div class="course-row">
+                <div><strong>Pebble Beach</strong><small>Golf Links</small></div>
+                <span>Hole 7</span>
+              </div>
+              <p class="scan-pill">QR scanned. You are on the tee.</p>
+              <div class="hole-card">
+                <span>The Seventh</span>
+                <strong>HOLE 7 · PAR 3</strong>
+                <small>106 YDS · WIND 8MPH SW</small>
+              </div>
+              <div class="pot-card">
+                <span>Today's ace pot</span>
+                <strong data-pot>$48,750</strong>
+                <small><span data-field>137</span> in today · grows $10 every entry</small>
+              </div>
+              <h3>$10 in. Ace the hole. Win it all.</h3>
+              <button class="phone-cta" id="enterPot">I am in · $10</button>
+              <small class="pay-note">Apple Pay style entry · no app install</small>
+            </div>
+
+            <div class="phone-view pay-view" data-view="pay">
+              <div class="pay-sheet">
+                <div class="grabber"></div>
+                <div class="pay-main">
+                  <div class="pay-logo">A</div>
+                  <div><strong>Aces · Hole 7 Pot</strong><small>Pebble Beach Golf Links</small></div>
+                  <b>$10</b>
+                </div>
+                <dl>
+                  <div><dt>Pay with</dt><dd>Apple Pay · 4029</dd></div>
+                  <div><dt>Entry</dt><dd>1 hole-in-one ticket</dd></div>
+                  <div><dt>If you ace it</dt><dd>You win the full pot</dd></div>
+                </dl>
+                <div class="face-check"><span></span>Confirming</div>
+              </div>
+            </div>
+
+            <div class="phone-view celebrate-view" data-view="celebrate">
+              <div class="big-check">A</div>
+              <h3>You are in.</h3>
+              <p>Entry #<span data-field>138</span> · Hole 7 · Pebble Beach</p>
+              <div class="pot-card mini">
+                <span>The pot is now</span>
+                <strong data-pot>$48,760</strong>
+                <small>You pushed it up $10</small>
+              </div>
+              <button class="phone-cta" id="seeLivePot">See the live pot</button>
+              <button class="phone-link" id="simulateAce">Simulate an ace</button>
+            </div>
+
+            <div class="phone-view live-view" data-view="live">
+              <div class="live-top"><strong>ACES.</strong><span>Live · Hole 7</span></div>
+              <div class="live-hero">
+                <span>Ace pot · winner takes all</span>
+                <strong data-pot>$48,760</strong>
+                <small>+120 in the last hour · <span data-field>138</span> in</small>
+              </div>
+              <div class="you-chip">
+                <b>IN</b>
+                <div><strong>You are entered</strong><small>Ticket #<span data-field>138</span> · good all day on Hole 7</small></div>
+              </div>
+              <div class="phone-feed">
+                <p><b>Maria K.</b> just entered the pot <span>+$10</span></p>
+                <p><b>Dev R.</b> is on the tee <span>+$10</span></p>
+                <p><b>Sam W.</b> won $920 last week <span>Trophy</span></p>
+              </div>
+              <div class="phone-actions">
+                <button id="inviteFoursome">Invite foursome</button>
+                <button id="aceButton">I aced it</button>
+              </div>
+            </div>
+
+            <div class="ace-overlay" id="aceOverlay">
+              <h3>Hole in one.</h3>
+              <strong data-pot>$48,760</strong>
+              <p>
+                Verified by Aces. Claim workflow starts here, with witnesses, course confirmation,
+                and payout review.
+              </p>
+              <button class="phone-cta" id="claimAce">Claim it</button>
+            </div>
+            <div class="phone-home"></div>
+          </div>
+        </section>
+      </section>
+
+      <section class="tab-panel active" data-panel="command">
+        <div class="content-grid command-grid">
+          <article class="panel">
+            <div class="panel-head"><h2>Launch posture</h2><span>62% prototype ready</span></div>
+            <div class="meter"><span></span></div>
+            <label>Product thesis<textarea>NiceAce is a hole-in-one and golf challenge platform where courses, sponsors, and foursomes create official prize-backed moments.</textarea></label>
+            <label>First customer set<input value="Weekend golfers, tournament organizers, course operators, and local sponsors" /></label>
+            <label>Wager/compliance posture<input value="Sponsor-funded prizes first; peer wagers later after compliance review" /></label>
+          </article>
+          <article class="panel">
+            <div class="panel-head"><h2>Two-pronged plan</h2><span>NiceAce plus Vibeco</span></div>
+            <div class="plan-step"><span>01</span><div><h3>Get NiceAce out</h3><p>Ship sponsor-funded hole-in-one and par-3 challenge pilots with claim verification, event setup, recap pages, and compliance review before peer wagering.</p></div></div>
+            <div class="plan-step"><span>02</span><div><h3>Bring it back to Vibeco</h3><p>Treat NiceAce as the proving ground for Vibeco's build-on-demand engine: accept requests, run agents, generate Lovable prompts, and commit Claude Code work through GitHub.</p></div></div>
+            <div class="plan-step"><span>03</span><div><h3>Mine the market</h3><p>Scan public golf, tournament, and sponsor conversations for pain points, cluster them, and promote only high-signal themes into PRDs.</p></div></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="tab-panel" data-panel="niceace">
+        <div class="content-grid">
+          <article class="panel"><div class="panel-head"><h2>Hole-in-one core</h2><span>V1 build</span></div><p>Course event setup, player buy-in, round confirmation, prize rules, and claim workflow.</p><div class="risk-box">Prize trust and compliance copy must be boringly clear before any social layer.</div></article>
+          <article class="panel"><div class="panel-head"><h2>Sponsor inventory</h2><span>Pilot package</span></div><p>Local sponsors fund prize pools, own branded holes, and get recap assets after each event.</p><div class="risk-box">Sell named golfer reach, recap clips, and attributed redemptions.</div></article>
+          <article class="panel"><div class="panel-head"><h2>Operator console</h2><span>Prototype</span></div><p>A single view for events, payouts, feedback, requests, AI analysis, and build handoff.</p><div class="risk-box">If this feels like admin software, it loses the sports-entertainment energy.</div></article>
+        </div>
+      </section>
+
+      <section class="tab-panel" data-panel="vibeco">
+        <div class="content-grid vibeco-grid">
+          <article class="panel">
+            <div class="panel-head"><h2>Agent router</h2><span>Perspective pass</span></div>
+            <div class="agent-buttons">
+              <button class="agent active" data-agent="Skeptic">Skeptic</button>
+              <button class="agent" data-agent="Customer">Customer</button>
+              <button class="agent" data-agent="Builder">Builder</button>
+              <button class="agent" data-agent="Sportsbook">Sportsbook</button>
+              <button class="agent" data-agent="Growth">Growth</button>
+            </div>
+            <blockquote id="agentOutput">The killer risk is trust. Users will forgive a rough leaderboard before they forgive unclear odds, prize eligibility, or a payout dispute.</blockquote>
+            <p class="muted">Vibeco owns analysis and handoff. Claude Code owns repo changes. Lovable owns quick UI iteration. GitHub is the audit trail.</p>
+          </article>
+          <article class="panel">
+            <div class="panel-head"><h2>Change request queue</h2><span>3 active</span></div>
+            <div class="request-list" id="requestList"></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="tab-panel" data-panel="scanner">
+        <div class="content-grid scanner-grid">
+          <article class="panel">
+            <div class="panel-head"><h2>Public pain-point scanner</h2><span>Prototype source inbox</span></div>
+            <div class="signal-list" id="signalList"></div>
+          </article>
+          <article class="panel">
+            <div class="panel-head"><h2>Selected signal</h2><span id="signalSegment">Golf trip organizer</span></div>
+            <blockquote id="signalQuote">Golf trip bets are fun until nobody remembers who owes what after the round.</blockquote>
+            <h3>Feature candidate</h3>
+            <p id="signalFeature">Trip ledger with auto-settlement summary</p>
+            <h3>Next pass</h3>
+            <p>Cluster duplicates, run agents, create PRD, then route to NiceAce or Vibeco playbook.</p>
+            <button class="primary" data-open-tab="prd">Generate PRD</button>
+          </article>
+        </div>
+      </section>
+
+      <section class="tab-panel" data-panel="prd">
+        <div class="prd-layout">
+          <article class="panel">
+            <div class="panel-head"><h2 id="prdTitle">Trip ledger with auto-settlement summary PRD</h2><span>Product requirements</span></div>
+            <div class="prd-document">
+              <h3>Problem</h3><p id="prdProblem">Golf trip bets are fun until nobody remembers who owes what after the round.</p>
+              <h3>Audience</h3><p id="prdAudience">Golf trip organizer</p>
+              <h3>V1 scope</h3>
+              <ul><li>Capture pain signal with source, segment, confidence, and raw context.</li><li>Run Skeptic, Customer, Builder, Sportsbook, and Growth perspectives.</li><li>Create a scoped Lovable prompt with acceptance criteria and risk notes.</li><li>Push accepted work into the NiceAce roadmap and Vibeco playbook ledger.</li></ul>
+              <h3>Success metrics</h3>
+              <ul><li>Signals promoted to roadmap per week</li><li>Accepted feature rate after agent review</li><li>Pilot event conversion lift</li><li>Sponsor renewal or upsell rate</li></ul>
+            </div>
+          </article>
+          <article class="panel">
+            <div class="panel-head"><h2>Handoff artifact</h2><span>Lovable plus Claude Code</span></div>
+            <pre id="handoffText"></pre>
+          </article>
+        </div>
+      </section>
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>

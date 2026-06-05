@@ -1,0 +1,190 @@
+@import url("https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800;900&family=Chakra+Petch:wght@500;600;700&display=swap");
+
+:root {
+  --ink: #06140b;
+  --panel: #102016;
+  --panel-2: #17281d;
+  --line: #334939;
+  --green: #4fb35b;
+  --brass: #e7bd62;
+  --cream: #ecebd9;
+  --muted: #b9c1aa;
+}
+
+* { box-sizing: border-box; letter-spacing: 0; }
+html { background: var(--ink); }
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 16% 0%, rgba(26, 88, 47, .55), transparent 32rem),
+    linear-gradient(135deg, #06140b, #0c1f12 50%, #041008);
+  color: var(--cream);
+  font-family: Barlow, sans-serif;
+}
+button, input, textarea { font: inherit; }
+button { cursor: pointer; }
+
+.app-shell { width: min(1460px, calc(100% - 32px)); margin: 0 auto; padding: 24px 0 64px; }
+.topbar {
+  position: sticky; top: 0; z-index: 10;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding: 16px 0; background: rgba(6, 20, 11, .88); backdrop-filter: blur(18px);
+}
+.eyebrow, .kicker, .panel-head span, .request-source {
+  margin: 0; color: var(--brass); font-size: .8rem; font-weight: 800; text-transform: uppercase;
+}
+.topbar h1 { margin: 4px 0 0; font-family: "Chakra Petch", sans-serif; font-size: 1.45rem; }
+.tab-row, .hero-actions, .agent-buttons { display: flex; flex-wrap: wrap; gap: 8px; }
+.tab, .agent, .primary, .secondary, .request button, .signal, .phone-tools button {
+  min-height: 2.55rem; border: 1px solid rgba(236,235,217,.16); border-radius: 8px;
+  color: var(--cream); background: rgba(16,32,22,.74); font-weight: 700;
+}
+.tab, .agent { padding: 0 12px; }
+.tab.active, .agent.active, .phone-tools button.on { background: var(--cream); color: var(--ink); border-color: var(--cream); }
+.primary, .secondary { padding: 0 16px; font-weight: 900; }
+.primary { background: var(--green); color: #06140b; border-color: var(--green); }
+.secondary { background: transparent; }
+
+.hero-grid {
+  display: grid; grid-template-columns: minmax(0,.9fr) minmax(380px,1fr);
+  gap: 32px; align-items: center; min-height: 520px; padding: 32px 0 48px;
+}
+.hero-copy { display: flex; flex-direction: column; gap: 16px; }
+.hero-copy h2 {
+  max-width: 11ch; margin: 0; font-family: "Chakra Petch", sans-serif;
+  font-size: clamp(3.2rem, 8vw, 7.6rem); line-height: .9;
+}
+.hero-copy p { max-width: 64ch; margin: 0; color: var(--muted); font-size: 1.05rem; line-height: 1.75; }
+
+.phone-shell { display: grid; place-items: center; gap: 12px; min-height: 620px; }
+.phone-tools {
+  display: flex; gap: 8px; padding: 8px; border: 1px solid rgba(236,235,217,.14);
+  border-radius: 999px; background: rgba(16,32,22,.84);
+}
+.phone-tools button { min-height: 2rem; border: 0; border-radius: 999px; padding: 0 12px; font-size: .82rem; }
+.phone {
+  position: relative; width: min(390px, 100%); height: 740px; overflow: hidden;
+  border: 10px solid #020804; border-radius: 42px; background: #071009;
+  box-shadow: 0 42px 90px rgba(0,0,0,.5), 0 0 0 1px rgba(236,235,217,.12);
+}
+.phone-shell.jackpot .phone {
+  background: radial-gradient(90% 48% at 50% 0%, rgba(231,189,98,.22), transparent 62%),
+    radial-gradient(90% 48% at 50% 100%, rgba(79,179,91,.18), transparent 66%), #071009;
+}
+.phone-shell.broadcast .phone {
+  background: linear-gradient(rgba(236,235,217,.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(236,235,217,.07) 1px, transparent 1px), #071722;
+  background-size: 28px 28px, 28px 28px, auto;
+}
+.phone-notch { position: absolute; top: 9px; left: 50%; z-index: 6; width: 116px; height: 27px; transform: translateX(-50%); border-radius: 999px; background: #010301; }
+.phone-status { position: absolute; top: 14px; left: 20px; right: 20px; z-index: 5; display: flex; justify-content: space-between; font-size: .78rem; font-weight: 900; }
+.phone-view { position: absolute; inset: 0; display: none; flex-direction: column; gap: 16px; padding: 64px 20px 32px; }
+.phone-view.active { display: flex; }
+.course-row, .live-top, .pay-main, .phone-actions, .you-chip { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.course-row strong, .live-top strong { display: block; font-family: "Chakra Petch", sans-serif; }
+.course-row small, .pay-main small, .you-chip small, .pay-note { display: block; color: rgba(236,235,217,.58); }
+.course-row span, .live-top span, .scan-pill, .pot-card span, .hole-card span, .live-hero span {
+  color: var(--brass); font-size: .78rem; font-weight: 900; text-transform: uppercase;
+}
+.scan-pill { align-self: center; margin: 0; border: 1px solid rgba(79,179,91,.44); border-radius: 999px; padding: 8px 12px; background: rgba(79,179,91,.12); color: #9be090; }
+.hole-card, .pot-card, .live-hero {
+  display: grid; gap: 8px; border: 1px solid rgba(231,189,98,.34); border-radius: 16px;
+  padding: 16px; text-align: center; background: rgba(16,32,22,.72);
+}
+.hole-card strong { font-family: "Chakra Petch", sans-serif; font-size: 1.85rem; }
+.hole-card small, .pot-card small, .live-hero small { color: rgba(236,235,217,.58); }
+.pot-card strong, .live-hero strong, .ace-overlay strong {
+  color: var(--brass); font-family: "Chakra Petch", sans-serif; font-size: 3.8rem; line-height: .9;
+  text-shadow: 0 0 28px rgba(231,189,98,.28);
+}
+.arrive-view h3, .celebrate-view h3, .ace-overlay h3 {
+  margin: auto 0 0; font-family: "Chakra Petch", sans-serif; font-size: 2rem; line-height: 1.05; text-align: center;
+}
+.phone-cta, .phone-link, .phone-actions button {
+  min-height: 3.25rem; border: 0; border-radius: 13px; padding: 0 16px; font-weight: 900;
+}
+.phone-cta { background: var(--green); color: #06140b; box-shadow: 0 14px 34px rgba(79,179,91,.28); }
+.phone-link { background: transparent; color: rgba(236,235,217,.68); }
+.pay-view { justify-content: end; background: rgba(0,0,0,.42); }
+.pay-sheet { display: grid; gap: 16px; border-radius: 32px; padding: 20px; background: #17281d; }
+.grabber { justify-self: center; width: 45px; height: 5px; border-radius: 999px; background: rgba(236,235,217,.28); }
+.pay-logo, .big-check, .you-chip b {
+  display: grid; place-items: center; width: 48px; height: 48px; border-radius: 13px;
+  background: var(--brass); color: var(--ink); font-family: "Chakra Petch", sans-serif; font-weight: 900;
+}
+.pay-main > b { font-family: "Chakra Petch", sans-serif; font-size: 1.6rem; }
+.pay-sheet dl { margin: 0; }
+.pay-sheet dl div { display: flex; justify-content: space-between; gap: 12px; padding: 12px 0; border-top: 1px solid rgba(236,235,217,.1); }
+.pay-sheet dd { margin: 0; color: #eed18c; text-align: right; }
+.face-check { display: grid; place-items: center; gap: 8px; color: rgba(236,235,217,.64); }
+.face-check span { width: 58px; height: 58px; border: 4px solid rgba(79,179,91,.32); border-top-color: var(--green); border-radius: 50%; animation: spin 900ms linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.celebrate-view { align-items: center; justify-content: center; text-align: center; }
+.celebrate-view h3 { margin-top: 16px; }
+.celebrate-view p { margin: 0; color: rgba(236,235,217,.66); }
+.pot-card.mini strong { font-size: 3rem; }
+.live-view { overflow-y: auto; }
+.you-chip { justify-content: start; border: 1px solid rgba(79,179,91,.38); border-radius: 14px; padding: 12px; background: rgba(79,179,91,.1); }
+.phone-feed { display: grid; gap: 8px; }
+.phone-feed p { display: flex; justify-content: space-between; gap: 12px; margin: 0; border: 1px solid rgba(236,235,217,.1); border-radius: 12px; padding: 12px; background: rgba(236,235,217,.05); }
+.phone-feed span { color: #52d469; font-weight: 900; }
+.phone-actions { margin-top: auto; }
+.phone-actions button { flex: 1; border: 1px solid rgba(236,235,217,.14); color: var(--cream); background: rgba(236,235,217,.07); }
+.phone-actions button:last-child { border: 0; background: var(--brass); color: var(--ink); }
+.ace-overlay { position: absolute; inset: 0; z-index: 9; display: none; flex-direction: column; align-items: center; justify-content: center; gap: 16px; padding: 24px; text-align: center; background: radial-gradient(circle at 50% 30%, rgba(231,189,98,.34), transparent 34%), #071009; }
+.ace-overlay.show { display: flex; }
+.ace-overlay h3 { margin: 0; }
+.ace-overlay p { color: rgba(236,235,217,.76); line-height: 1.6; }
+.phone-home { position: absolute; left: 50%; bottom: 9px; width: 118px; height: 5px; transform: translateX(-50%); border-radius: 999px; background: rgba(236,235,217,.42); }
+.phone-shell.broadcast .hole-card, .phone-shell.broadcast .pot-card, .phone-shell.broadcast .live-hero { border-radius: 4px; border-color: rgba(79,179,91,.34); }
+.phone-shell.broadcast .phone-cta, .phone-shell.broadcast .phone-actions button:last-child { border-radius: 4px; background: var(--green); }
+
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+.content-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.command-grid, .vibeco-grid, .scanner-grid, .prd-layout { grid-template-columns: minmax(0, 1fr) minmax(360px, .8fr); }
+.panel {
+  display: flex; flex-direction: column; gap: 16px; min-height: 100%; padding: 20px;
+  border: 1px solid rgba(236,235,217,.14); border-radius: 8px; background: rgba(16,32,22,.85);
+}
+.panel-head { display: flex; align-items: start; justify-content: space-between; gap: 12px; }
+.panel h2, .panel h3 { margin: 0; font-family: "Chakra Petch", sans-serif; }
+.panel h2 { font-size: 1.35rem; }
+.panel h3 { color: var(--brass); font-size: 1rem; }
+.panel p, .panel li, .panel dd, .panel blockquote { color: var(--muted); line-height: 1.65; }
+.panel p, .panel blockquote { margin: 0; }
+.muted { color: rgba(236,235,217,.58) !important; }
+.meter { height: .7rem; overflow: hidden; border-radius: 999px; background: rgba(0,0,0,.3); }
+.meter span { display: block; width: 62%; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--green), var(--brass)); }
+label { display: flex; flex-direction: column; gap: 8px; color: var(--brass); font-weight: 800; }
+input, textarea { width: 100%; border: 1px solid rgba(236,235,217,.18); border-radius: 8px; background: rgba(0,0,0,.24); color: var(--cream); padding: 12px; outline: none; }
+textarea { min-height: 8rem; resize: vertical; }
+.plan-step, .request {
+  display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 12px; align-items: start;
+  padding: 16px; border: 1px solid rgba(236,235,217,.12); border-radius: 8px; background: rgba(23,40,29,.7);
+}
+.plan-step > span { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 999px; background: var(--cream); color: var(--ink); font-family: "Chakra Petch"; font-weight: 900; }
+.risk-box { padding: 12px; border: 1px solid rgba(214,90,66,.5); border-radius: 8px; color: #f2c7b7; background: rgba(214,90,66,.12); line-height: 1.6; }
+blockquote { border: 1px solid rgba(231,189,98,.34); border-radius: 8px; padding: 16px; background: rgba(231,189,98,.1); font-size: 1.08rem; }
+.request { grid-template-columns: minmax(0, 1fr) auto; }
+.request button { min-width: 8.5rem; padding: 0 12px; color: var(--brass); }
+.signal { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 12px; width: 100%; padding: 12px; text-align: left; }
+.signal.active { border-color: var(--green); background: rgba(10, 71, 31, .75); }
+.signal span, .signal small, dt { color: var(--brass); font-weight: 800; }
+.request-list, .signal-list, .prd-document { display: flex; flex-direction: column; gap: 12px; }
+.prd-layout { display: grid; gap: 16px; }
+.prd-document ul { margin: 0; padding-left: 20px; }
+pre { overflow: auto; margin: 0; padding: 16px; border-radius: 8px; background: #06100a; color: var(--muted); font-size: .9rem; line-height: 1.55; white-space: pre-wrap; }
+
+@media (max-width: 1060px) {
+  .topbar, .hero-grid, .content-grid, .command-grid, .vibeco-grid, .scanner-grid, .prd-layout { grid-template-columns: 1fr; }
+  .topbar { display: grid; }
+}
+@media (max-width: 680px) {
+  .app-shell { width: min(100% - 20px, 1460px); }
+  .topbar { position: static; padding-bottom: 24px; }
+  .hero-copy h2 { font-size: 3rem; }
+  .hero-grid { min-height: auto; padding-top: 16px; }
+  .signal, .request { grid-template-columns: 1fr; }
+}
